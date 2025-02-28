@@ -1,4 +1,7 @@
 import random
+import time
+
+random.seed(time.time())
 
 KART = 40
 WHEEL = 21
@@ -8,10 +11,11 @@ CHAR_ROW = 6
 CHAR_COL = 8
 
 MAX_ITEMS = 7
+rand_items = random.randint(1,7)
 ITEM_ROW = 4
 ITEM_COL = 6
 
-players = int(input("How many players? (MAX of 48) "))
+players = int(input("How many players? (MAX of 4) "))
 
 COURSES = int(input("How many Courses? (MAX of 96) "))
 COURSE_ROW = 4
@@ -24,7 +28,7 @@ for i in range(players):
         col = random.randint(1, CHAR_COL - 1)
     else:
         col = random.randint(1, CHAR_COL)
-    print(f'Player {i+1}:\n\tROW: {row}\n\tCOL: {col}')
+    print(f'Player {i+1}:\n\tROW, COL: {row}, {col}')
 
 print('\nKART')
 for i in range(players):
@@ -39,14 +43,14 @@ for i in range(players):
     print(f'Player {i+1}: {random.randint(1, GLIDE)}')
 
 print('\nITEMS')
-for i in range(MAX_ITEMS):
+for i in range(rand_items):
     loopRow = random.randint(1, ITEM_ROW)
     if loopRow == 6:
-        loopCol = random.randint(1, ITEM_COL - 2)
+        loopRow = random.randint(1, ITEM_COL - 2)
     else:
         loopCol = random.randint(1, ITEM_COL)
         
-    print(f'\tITEM {i+1} ROW: {loopRow}\n\tITEM {i+1} COL: {loopCol}')
+    print(f'\tITEM {i+1} ROW, COL: {loopRow}, {loopCol}')
     
 print('\nCOURSE')
 course = random.randint(1,4)
@@ -64,5 +68,5 @@ for i in range(COURSES):
         course_col = random.randint(1, COURSE_COL)
         course = random.randint(1,4)
     courseList[course_row][course_col].remove(course)
-    print(f'\tCOURSE {i+1} ROW, COLUMN: {random.randint(1, COURSE_ROW)}, {random.randint(1, COURSE_COL)}')
+    print(f'\tCOURSE {i+1} ROW, COLUMN, TRACK: {random.randint(1, COURSE_ROW)}, {random.randint(1, COURSE_COL)}, {course}')
     
