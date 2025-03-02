@@ -161,13 +161,13 @@ if __name__ == "__main__":
     while(playChoice.lower() == "yes"):
         rand_items = random.randint(1,7)
     
-        players = int(input("How many players? (MAX of 4) "))
+        players = int(input("\nHow many players? (MAX of 4)\n"))
         while players not in {1, 2, 3, 4}:
-            players = int(input("How many players? (MAX of 4) "))
+            players = int(input("How many players? (MAX of 4)\n"))
         
-        COURSES = int(input("How many Courses? (MAX of 48) "))
+        COURSES = int(input("\nHow many Courses? (MAX of 48)\n"))
         while COURSES not in {1, 4, 6, 8, 12, 16, 24, 32, 48}:
-            COURSES = int(input("How many Courses? (MAX of 48) "))
+            COURSES = int(input("How many Courses? (MAX of 48)\n"))
                 
         COURSE_ROW = 4
         COURSE_COL = 6
@@ -251,5 +251,5 @@ if __name__ == "__main__":
             
             print(f'\tCOURSE {i+1}: {cup}: {track}')
         
-        playChoice = input("\nWould you like to play? (YES/NO)")
+        playChoice = input("\nWould you like to play? (YES/NO)\n")
     print("Kill yourself ong")
