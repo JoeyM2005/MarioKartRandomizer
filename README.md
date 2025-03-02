@@ -19,5 +19,5 @@ This is created for almost anything choice-related in Mario Kart 8 Deluxe. Coded
   - Premade sets of items vs truly random
   - selectable randomness (user inputs number of random things)
 
-## SPRITES
+## SPRITES:
 - https://www.spriters-resource.com/nintendo_switch/mariokart8deluxe/sheet/94161/
