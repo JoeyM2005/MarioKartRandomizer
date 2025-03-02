@@ -3,21 +3,19 @@ import time
 
 random.seed(time.time())
 
+# Global Constants
 KART = 40
 WHEEL = 21
 GLIDE = 15
-PLAYERS = [] #TODO: Fill with characters and change random to select from list
-
-CHAR_ROW = 6
-CHAR_COL = 8
 
 MAX_ITEMS = 7
 
 ITEM_ROW = 4
 ITEM_COL = 6
 
+# More Advanced Player Randomization
 def birdo():
-    b_row, b_col = random.randint(1,3), random.randint(1,3)
+    b_row, b_col = random.randint(1, 3), random.randint(1, 3)
     if (b_row == 1):
         if (b_col == 1): return 'Birdo'
         if (b_col == 2): return 'Birdo (Light Blue)'
@@ -32,7 +30,7 @@ def birdo():
         if (b_col == 3): return 'Birdo (Orange)'
 
 def yoshi():
-    y_row, y_col = random.randint(1,3), random.randint(1,3)
+    y_row, y_col = random.randint(1, 3), random.randint(1, 3)
     if (y_row == 1):
         if (y_col == 1): return 'Green Yoshi'
         if (y_col == 2): return 'Light-blue Yoshi'
@@ -47,7 +45,7 @@ def yoshi():
         if (y_col == 3): return 'Orange Yoshi'
 
 def inkling():
-    i_row, i_col = random.randint(1,2), random.randint(1,2)
+    i_row, i_col = random.randint(1, 2), random.randint(1, 2)
     if (i_row == 1):
         if (i_col == 1): return 'Inkling Girl (Orange)'
         if (i_col == 2): return 'Inkling Girl (Green)'
@@ -58,14 +56,31 @@ def inkling():
         if (i_col == 3): return 'Inkling Boy (Light-blue)'
 
 def villager():
-    v_row = random.randint(1,2)
+    v_row = random.randint(1, 2)
     if (v_row == 1): return 'Villager (Boy)'
     if (v_row == 2): return 'Villager (Girl)'
     
 def link():
-    l_row = random.randint(1,2)
+    l_row = random.randint(1, 2)
     if (l_row == 1): return 'Link (Champion Tunic)'
     if (l_row == 2): return 'Link (Classic)'
+    
+'''def metalMario():
+    m_row = random.randint(1, 2)
+    if (m_row == 1): 'Gold Mario'
+    if (m_row == 2): 'Metal Mario'''
+
+def shyGuy():
+    s_num = random.randint(1, 9)
+    if (s_num == 1): 'Red Shy Guy'
+    if (s_num == 2): 'Light-Blue Shy Guy'
+    if (s_num == 3): 'Black Shy Guy'
+    if (s_num == 4): 'Green Shy Guy'
+    if (s_num == 5): 'Yellow Shy Guy'
+    if (s_num == 6): 'White Shy Guy'
+    if (s_num == 7): 'Blue Shy Guy'
+    if (s_num == 8): 'Pink Shy Guy'
+    if (s_num == 9): 'Orange Shy Guy'
 
 def items(row, col):
     if (row == 1):
@@ -94,68 +109,15 @@ def items(row, col):
         if (col == 2): return '8'
         if (col == 3): return 'Coin'
         if (col == 4): return 'Boo'
-          
-def assignCharacter(row, col):
-    if(row == 1):
-        if(col == 1): return 'Mario'
-        if(col == 2): return 'Luigi'
-        if(col == 3): return 'Peach'
-        if(col == 4): return 'Daisy'
-        if(col == 5): return 'Rosalina'
-        if(col == 6): return 'Tanooki Mario'
-        if(col == 7): return 'Cat Peach'
-        if(col == 8): return birdo()
-    if(row == 2):
-        if(col == 1): return yoshi()
-        if(col == 2): return 'Toad'
-        if(col == 3): return 'Koopa Troopa'
-        if(col == 4): return 'Shy Guy'
-        if(col == 5): return 'Lakitu'
-        if(col == 6): return 'Toadette'
-        if(col == 7): return 'King Boo'
-        if(col == 8): return 'Petey Piranha'
-    if(row == 3):
-        if(col == 1): return 'Baby Mario'
-        if(col == 2): return 'Baby Luigi'
-        if(col == 3): return 'Baby Peach'
-        if(col == 4): return 'Baby Daisy'
-        if(col == 5): return 'Baby Rosalina'
-        if(col == 6): return 'Metal/Gold Mario'
-        if(col == 7): return 'Pink Gold Peach'
-        if(col == 8): return 'Wiggler'
-    if(row == 4):
-        if(col == 1): return 'Wario'
-        if(col == 2): return 'Waluigi'
-        if(col == 3): return 'Donkey Kong'
-        if(col == 4): return 'Bowser'
-        if(col == 5): return 'Dry Bones'
-        if(col == 6): return 'Bowser Jr.'
-        if(col == 7): return 'Dry Bowser'
-        if(col == 8): return 'Kamek'
-    if(row == 5):
-        if(col == 1): return 'Lemmy'
-        if(col == 2): return 'Lary'
-        if(col == 3): return 'Wendy'
-        if(col == 4): return 'Ludwig'
-        if(col == 5): return 'Iggy'
-        if(col == 6): return 'Roy'
-        if(col == 7): return 'Morton'
-        if(col == 8): return 'Peachette'
-    if(row == 6):
-        if(col == 1): return inkling()
-        if(col == 2): return villager()
-        if(col == 3): return 'Isabelle'
-        if(col == 4): return link()
-        if(col == 5): return 'Diddy Kong'
-        if(col == 6): return 'Funky Kong'
-        if(col == 7): return 'Pauline'
-
-
-
 
 if __name__ == "__main__":
     
-    
+    characters = ['Mario', 'Luigi', 'Peach', 'Daisy', 'Rosalina', 'Tanooki Mario', 'Cat Peach', birdo(),
+            yoshi(), 'Toad', 'Koopa Troopa', shyGuy(), 'Lakitu', 'Toadette', 'King Boo', 'Petey Piranha',
+            'Baby Mario', 'Baby Luigi', 'Baby Peach', 'Baby Daisy', 'Baby Rosalina', 'Metal Mario', 'Pink Gold Peach', 'Wiggly',
+            'Wario', 'Waluigi', 'Donkey Kong', 'Bowser', 'Dry Bones', 'Bowser Jr.', 'Dry Bowser', 'Kamek',
+            'Lemmy', 'Lary', 'Wendy', 'Ludwig', 'Iggy', 'Roy', 'Morton', 'Peachette',
+            inkling(), villager(), 'Isabelle', link(), 'Diddy Kong', 'Funky Kong', 'Pauline']
     
     playChoice = "yes"
     while(playChoice.lower() == "yes"):
@@ -174,13 +136,8 @@ if __name__ == "__main__":
         
         print('\nCHARACTER')
         for i in range(players):
-            row = random.randint(1, CHAR_ROW)
-            if row == 6:
-                col = random.randint(1, CHAR_COL - 1)
-            else:
-                col = random.randint(1, CHAR_COL)
-            character = assignCharacter(row, col)
-            print(f'\tPlayer {i+1}: {character}')
+            character = random.randint(1, len(characters))
+            print(f'\tPlayer {i+1}: {characters[character]}')
         
         print('\nKART')
         for i in range(players):
