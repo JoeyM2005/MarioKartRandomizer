@@ -136,7 +136,7 @@ if __name__ == "__main__":
         
         print('\nCHARACTER')
         for i in range(players):
-            character = random.randint(1, len(characters))
+            character = random.randint(1, len(characters) - 1)
             print(f'\tPlayer {i+1}: {characters[character]}')
         
         print('\nKART')
