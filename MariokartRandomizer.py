@@ -82,33 +82,7 @@ def shyGuy():
     if (s_num == 8): 'Pink Shy Guy'
     if (s_num == 9): 'Orange Shy Guy'
 
-def items(row, col):
-    if (row == 1):
-        if (col == 1): return 'Banana Peel'
-        if (col == 2): return 'Triple Banana Peels'
-        if (col == 3): return 'Green Shell'
-        if (col == 4): return 'Triple Green Shells'
-        if (col == 5): return 'Red Shell'
-        if (col == 6): return 'Triple Red Shells'
-    if (row == 2):
-        if (col == 1): return 'Blue Shell'
-        if (col == 2): return 'Bomb-omb'
-        if (col == 3): return 'Mushroom'
-        if (col == 4): return 'Triple Mushroom'
-        if (col == 5): return 'Golden/Queen Mushroom'
-        if (col == 6): return 'Bullet Bill'
-    if (row == 3):
-        if (col == 1): return 'Blooper'
-        if (col == 2): return 'Lightning'
-        if (col == 3): return 'Star'
-        if (col == 4): return 'Fireflower'
-        if (col == 5): return 'Boomerang'
-        if (col == 6): return 'Piranha Plant'
-    if (row == 4):
-        if (col == 1): return 'Boom Box'
-        if (col == 2): return '8'
-        if (col == 3): return 'Coin'
-        if (col == 4): return 'Boo'
+
 
 if __name__ == "__main__":
     
@@ -152,14 +126,15 @@ if __name__ == "__main__":
             print(f'\tPlayer {i+1}: {random.randint(1, GLIDE)}')
         
         print('\nITEMS')
+        itemList = ['Banana Peel', 'Triple Banana Peels', 'Green Shell', 'Triple Green Shells', 'Red Shell', 'Triple Red Shells','Blue Shell',
+ 'Bomb-omb', 'Mushroom', 'Triple Mushroom', 'Golden/Queen Mushroom', 'Bullet Bill', 'Blooper', 'Lightning', 'Star',
+ 'Fireflower', 'Boomerang', 'Piranha Plant', 'Boom Box', '8', 'Coin', 'Boo']
         for i in range(rand_items):
-            loopRow = random.randint(1, ITEM_ROW)
-            if loopRow == 4:
-                loopCol = random.randint(1, ITEM_COL - 2)
-            else:
-                loopCol = random.randint(1, ITEM_COL)
+            itemLen = len(itemList)
+            item = itemList[random.randint(0, itemLen - 1)]
+            itemList.remove(item)
                 
-            print(f'\tITEM {i+1}: {items(loopRow, loopCol)}')
+            print(f'\tITEM {i+1}: {item}')
             
         print('\nCOURSE')
         course = random.randint(1,4)
