@@ -47,7 +47,7 @@ def link():
 def metalMario():
     metalMarios = ['Gold Mario', 'Metal Mario']
     m_num = random.randint(0, len(metalMarios) - 1)
-    return metalMarios[m_row]
+    return metalMarios[m_num]
 
 def shyGuy():
     shyGuys = ['Red Shy Guy', 'Light-Blue Shy Guy', 'Black Shy Guy', 'Green Shy Guy',
