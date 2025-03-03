@@ -3,6 +3,7 @@ import time
 
 random.seed(time.time())
 
+
 # Global Constants
 KART = 40
 WHEEL = 21
@@ -13,74 +14,46 @@ MAX_ITEMS = 7
 ITEM_ROW = 4
 ITEM_COL = 6
 
+
 # More Advanced Player Randomization
 def birdo():
-    b_row, b_col = random.randint(1, 3), random.randint(1, 3)
-    if (b_row == 1):
-        if (b_col == 1): return 'Birdo'
-        if (b_col == 2): return 'Birdo (Light Blue)'
-        if (b_col == 3): return 'Birdo (Black)'
-    if (b_row == 2):
-        if (b_col == 1): return 'Birdo (Red)'
-        if (b_col == 2): return 'Birdo (Yellow)'
-        if (b_col == 3): return 'Birdo (White)'
-    if (b_row == 3):
-        if (b_col == 1): return 'Birdo (Blue)'
-        if (b_col == 2): return 'Birdo (Green)'
-        if (b_col == 3): return 'Birdo (Orange)'
+    birdos = ['Birdo (Pink)', 'Birdo (Light Blue)', 'Birdo (Black)', 'Birdo (Red)',
+    'Birdo (Yellow)', 'Birdo (White)', 'Birdo (Blue)', 'Birdo (Green)', 'Birdo (Orange)']
+    b_num = random.randint(0, len(birdos) - 1)
+    return birdos[b_num]
 
 def yoshi():
-    y_row, y_col = random.randint(1, 3), random.randint(1, 3)
-    if (y_row == 1):
-        if (y_col == 1): return 'Green Yoshi'
-        if (y_col == 2): return 'Light-blue Yoshi'
-        if (y_col == 3): return 'Black Yoshi'
-    if (y_row == 2):
-        if (y_col == 1): return 'Red Yoshi'
-        if (y_col == 2): return 'Yellow Yoshi'
-        if (y_col == 3): return 'Black Yoshi'
-    if (y_row == 3):
-        if (y_col == 1): return 'Blue Yoshi'
-        if (y_col == 2): return 'Pink Yoshi'
-        if (y_col == 3): return 'Orange Yoshi'
+    yoshis = ['Green Yoshi', 'Light-blue Yoshi', 'Black Yoshi', 'Red Yoshi',
+    'Yellow Yoshi', 'Black Yoshi', 'Blue Yoshi', 'Pink Yoshi', 'Orange Yoshi']
+    y_num = random.randint(0, len(yoshis) - 1)
+    return yoshis[y_num]
 
 def inkling():
-    i_row, i_col = random.randint(1, 2), random.randint(1, 2)
-    if (i_row == 1):
-        if (i_col == 1): return 'Inkling Girl (Orange)'
-        if (i_col == 2): return 'Inkling Girl (Green)'
-        if (i_col == 3): return 'Inkling Girl (Pink)'
-    if (i_row == 2):
-        if (i_col == 1): return 'Inkling Boy (Blue)'
-        if (i_col == 2): return 'Inkling Boy (Purple)'
-        if (i_col == 3): return 'Inkling Boy (Light-blue)'
+    inklings = ['Inkling Girl (Orange)', 'Inkling Girl (Green)', 'Inkling Girl (Pink)',
+    'Inkling Boy (Blue)', 'Inkling Boy (Purple)', 'Inkling Boy (Light-blue)']
+    i_num = random.randint(0, len(inklings) - 1)
+    return inklings[i_num]
 
 def villager():
-    v_row = random.randint(1, 2)
-    if (v_row == 1): return 'Villager (Boy)'
-    if (v_row == 2): return 'Villager (Girl)'
+    villagers = ['Villager (Boy)', 'Villager (Girl)']
+    v_num = random.randint(0, len(villagers) - 1)
+    return villagers[v_num]
     
 def link():
-    l_row = random.randint(1, 2)
-    if (l_row == 1): return 'Link (Champion Tunic)'
-    if (l_row == 2): return 'Link (Classic)'
+    links = ['Link (Champion Tunic)', 'Link (Classic)']
+    l_num = random.randint(0, len(links) - 1)
+    return links[l_num]
     
-'''def metalMario():
-    m_row = random.randint(1, 2)
-    if (m_row == 1): 'Gold Mario'
-    if (m_row == 2): 'Metal Mario'''
+def metalMario():
+    metalMarios = ['Gold Mario', 'Metal Mario']
+    m_num = random.randint(0, len(metalMarios) - 1)
+    return metalMarios[m_row]
 
 def shyGuy():
-    s_num = random.randint(1, 9)
-    if (s_num == 1): 'Red Shy Guy'
-    if (s_num == 2): 'Light-Blue Shy Guy'
-    if (s_num == 3): 'Black Shy Guy'
-    if (s_num == 4): 'Green Shy Guy'
-    if (s_num == 5): 'Yellow Shy Guy'
-    if (s_num == 6): 'White Shy Guy'
-    if (s_num == 7): 'Blue Shy Guy'
-    if (s_num == 8): 'Pink Shy Guy'
-    if (s_num == 9): 'Orange Shy Guy'
+    shyGuys = ['Red Shy Guy', 'Light-Blue Shy Guy', 'Black Shy Guy', 'Green Shy Guy',
+    'Yellow Shy Guy', 'White Shy Guy', 'Blue Shy Guy', 'Pink Shy Guy', 'Orange Shy Guy']
+    s_num = random.randint(0, len(shyGuys) - 1)
+    return shyGuys[s_num]
 
 
 
@@ -93,6 +66,7 @@ if __name__ == "__main__":
             'Lemmy', 'Lary', 'Wendy', 'Ludwig', 'Iggy', 'Roy', 'Morton', 'Peachette',
             inkling(), villager(), 'Isabelle', link(), 'Diddy Kong', 'Funky Kong', 'Pauline']
     
+    # Player input for playing the game, how many players, and how many courses
     playChoice = "yes"
     while(playChoice.lower() == "yes"):
         rand_items = random.randint(1,7)
@@ -108,34 +82,44 @@ if __name__ == "__main__":
         COURSE_ROW = 4
         COURSE_COL = 6
         
+
+        # Character Print
         print('\nCHARACTER')
         for i in range(players):
             character = random.randint(1, len(characters) - 1)
             print(f'\tPlayer {i+1}: {characters[character]}')
         
+        # Kart Print
         print('\nKART')
         for i in range(players):
             print(f'\tPlayer {i+1}: {random.randint(1, KART)}')
         
+        # Wheel Print
         print('\nWHEEL')
         for i in range(players):
             print(f'\tPlayer {i+1}: {random.randint(1, WHEEL)}')
         
-        print('\nGLIDE')
+        # Glider Print
+        print('\nGLIDER')
         for i in range(players):
             print(f'\tPlayer {i+1}: {random.randint(1, GLIDE)}')
         
+
+        # Items logic
         print('\nITEMS')
-        itemList = ['Banana Peel', 'Triple Banana Peels', 'Green Shell', 'Triple Green Shells', 'Red Shell', 'Triple Red Shells','Blue Shell',
- 'Bomb-omb', 'Mushroom', 'Triple Mushroom', 'Golden/Queen Mushroom', 'Bullet Bill', 'Blooper', 'Lightning', 'Star',
- 'Fireflower', 'Boomerang', 'Piranha Plant', 'Boom Box', '8', 'Coin', 'Boo']
+        itemList = ['Banana Peel', 'Triple Banana Peels', 'Green Shell', 'Triple Green Shells',
+        'Red Shell', 'Triple Red Shells','Blue Shell', 'Bomb-omb', 'Mushroom', 'Triple Mushroom',
+        'Golden/Queen Mushroom', 'Bullet Bill', 'Blooper', 'Lightning', 'Star','Fireflower', 'Boomerang',
+        'Piranha Plant', 'Boom Box', '8', 'Coin', 'Boo']
+
         for i in range(rand_items):
-            itemLen = len(itemList)
-            item = itemList[random.randint(0, itemLen - 1)]
+            item = itemList[random.randint(0, len(itemList) - 1)]
             itemList.remove(item)
                 
             print(f'\tITEM {i+1}: {item}')
-            
+
+
+        # Course logic   
         print('\nCOURSE')
         course = random.randint(1,4)
         course_row = random.randint(1, COURSE_ROW)
@@ -170,7 +154,8 @@ if __name__ == "__main__":
                                 'Cherry Cup':['Los Angeles Laps', 'Sunset Wilds', 'Koopa Cape', 'Vancouver Velocity'],
                                 'Acorn Cup':['Rome Avanti', 'DK Mountain', 'Daisy Circuit', 'Pirnha Plant Cove'],
                                 'Spiny Cup':['Madrid Drive', "Rosalina's Ice World", 'Bowser Castle 3', 'Rainbow Road']} }
-            
+        
+        # Translates from numbers to the course cup and track for printing
         for i in range(COURSES):
             while(course not in courseList[course_row][course_col]):
                 course_row = random.randint(1, COURSE_ROW)
@@ -178,9 +163,9 @@ if __name__ == "__main__":
                 course = random.randint(1,4)
             courseList[course_row][course_col].remove(course)
             cupList = list(courseNamesList[course_row].keys())
+
             cup = (cupList[course_col - 1])
             track = courseNamesList[course_row][cup][course - 1]
-            
             print(f'\tCOURSE {i+1}: {cup}: {track}')
         
         playChoice = input("\nWould you like to play? (YES/NO)\n")
