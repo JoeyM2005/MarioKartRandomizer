@@ -3,13 +3,10 @@ import time
 
 random.seed(time.time())
 
-
 # Global Constants
 KART = 40
 WHEEL = 21
 GLIDE = 15
-
-MAX_ITEMS = 7
 
 ITEM_ROW = 4
 ITEM_COL = 6
@@ -55,6 +52,15 @@ def shyGuy():
     s_num = random.randint(0, len(shyGuys) - 1)
     return shyGuys[s_num]
 
+def items(random_set_b, max_items):
+    if random_set_b:
+        max_items = random.randint(1, max_items)
+
+    for i in range(max_items):
+        item = itemList[random.randint(0, len(itemList) - 1)]
+        itemList.remove(item)
+                
+        print(f'\tITEM {i+1}: {item}')
 
 
 if __name__ == "__main__":
@@ -69,7 +75,7 @@ if __name__ == "__main__":
     # Player input for playing the game, how many players, and how many courses
     playChoice = "yes"
     while(playChoice.lower() == "yes"):
-        rand_items = random.randint(1,7)
+        max_items = -1
     
         players = int(input("\nHow many players? (MAX of 4)\n"))
         while players not in {1, 2, 3, 4}:
@@ -79,6 +85,27 @@ if __name__ == "__main__":
         while COURSES not in {1, 4, 6, 8, 12, 16, 24, 32, 48}:
             COURSES = int(input("How many Courses? (MAX of 48)\n"))
                 
+        itemList = ['Banana Peel', 'Triple Banana Peels', 'Green Shell', 'Triple Green Shells',
+        'Red Shell', 'Triple Red Shells','Blue Shell', 'Bomb-omb', 'Mushroom', 'Triple Mushroom',
+        'Golden/Queen Mushroom', 'Bullet Bill', 'Blooper', 'Lightning', 'Star','Fireflower', 'Boomerang',
+        'Piranha Plant', 'Boom Box', '8', 'Coin', 'Boo']
+
+        #input for random vs set number
+        random_set_i = input("Do you want a random number of items (random) or a set a number of items (set) \n")
+        while True:
+            match random_set_i.lower():
+                case "random":
+                    max_items = int(input("What is the max number of items \n"))
+                    random_set_b = True
+                case "set":
+                    max_items = int(input("How many items do you want? \n"))
+                    random_set_b = False
+                case _:
+                    random_set_i = input("Do you want a random number of items (random) or a set a number of items (set) \n")
+            if ((max_items > 0) and (max_items <= 22)):
+                break
+        
+        print(f'max items {max_items} and random {random_set_i}, {random_set_b}')
         COURSE_ROW = 4
         COURSE_COL = 6
         
@@ -106,17 +133,10 @@ if __name__ == "__main__":
         
 
         # Items logic
-        print('\nITEMS')
-        itemList = ['Banana Peel', 'Triple Banana Peels', 'Green Shell', 'Triple Green Shells',
-        'Red Shell', 'Triple Red Shells','Blue Shell', 'Bomb-omb', 'Mushroom', 'Triple Mushroom',
-        'Golden/Queen Mushroom', 'Bullet Bill', 'Blooper', 'Lightning', 'Star','Fireflower', 'Boomerang',
-        'Piranha Plant', 'Boom Box', '8', 'Coin', 'Boo']
 
-        for i in range(rand_items):
-            item = itemList[random.randint(0, len(itemList) - 1)]
-            itemList.remove(item)
-                
-            print(f'\tITEM {i+1}: {item}')
+        print('\nITEMS')
+
+        items(random_set_b, max_items)
 
 
         # Course logic   
