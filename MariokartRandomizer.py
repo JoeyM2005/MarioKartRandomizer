@@ -56,22 +56,101 @@ def items(random_set_b, max_items):
     if random_set_b:
         max_items = random.randint(1, max_items)
 
+    print('\nITEMS')
     for i in range(max_items):
         item = itemList[random.randint(0, len(itemList) - 1)]
         itemList.remove(item)
                 
         print(f'\tITEM {i+1}: {item}')
 
-
-if __name__ == "__main__":
-    
+def characters():
     characters = ['Mario', 'Luigi', 'Peach', 'Daisy', 'Rosalina', 'Tanooki Mario', 'Cat Peach', birdo(),
             yoshi(), 'Toad', 'Koopa Troopa', shyGuy(), 'Lakitu', 'Toadette', 'King Boo', 'Petey Piranha',
             'Baby Mario', 'Baby Luigi', 'Baby Peach', 'Baby Daisy', 'Baby Rosalina', 'Metal Mario', 'Pink Gold Peach', 'Wiggly',
             'Wario', 'Waluigi', 'Donkey Kong', 'Bowser', 'Dry Bones', 'Bowser Jr.', 'Dry Bowser', 'Kamek',
             'Lemmy', 'Lary', 'Wendy', 'Ludwig', 'Iggy', 'Roy', 'Morton', 'Peachette',
             inkling(), villager(), 'Isabelle', link(), 'Diddy Kong', 'Funky Kong', 'Pauline']
-    
+
+    # Character Print
+    print('\nCHARACTER')
+    for i in range(players):
+        character = random.randint(1, len(characters) - 1)
+        print(f'\tPlayer {i+1}: {characters[character]}')
+
+def karts():
+    # Kart Print
+    print('\nKART')
+    for i in range(players):
+        print(f'\tPlayer {i+1}: {random.randint(1, KART)}')
+
+def wheels():
+    # Wheel Print
+    print('\nWHEEL')
+    for i in range(players):
+        print(f'\tPlayer {i+1}: {random.randint(1, WHEEL)}')
+
+def gliders():
+    # Glider Print
+    print('\nGLIDER')
+    for i in range(players):
+        print(f'\tPlayer {i+1}: {random.randint(1, GLIDE)}')
+
+
+def courses():
+    COURSE_ROW = 4
+    COURSE_COL = 6
+
+    print('\nCOURSE')
+    course = random.randint(1,4)
+    course_row = random.randint(1, COURSE_ROW)
+    course_col = random.randint(1, COURSE_COL)
+        
+    courseList = {1:{1:[1, 2, 3, 4],2:[1, 2, 3, 4],3:[1, 2, 3, 4],4:[1, 2, 3, 4],5:[1, 2, 3, 4],6:[1, 2, 3, 4]},
+        2:{1:[1, 2, 3, 4],2:[1, 2, 3, 4],3:[1, 2, 3, 4],4:[1, 2, 3, 4],5:[1, 2, 3, 4],6:[1, 2, 3, 4]},
+        3:{1:[1, 2, 3, 4],2:[1, 2, 3, 4],3:[1, 2, 3, 4],4:[1, 2, 3, 4],5:[1, 2, 3, 4],6:[1, 2, 3, 4]},
+        4:{1:[1, 2, 3, 4],2:[1, 2, 3, 4],3:[1, 2, 3, 4],4:[1, 2, 3, 4],5:[1, 2, 3, 4],6:[1, 2, 3, 4]}}
+        
+    courseNamesList = { 1: {'Mushroom Cup':['Mario Kart Stadium', 'Water Park', 'Sweet Sweet Canyon', 'Thwomp Ruins'],
+                            'Flower Cup':['Mario Circuit', 'Toad Harbor', 'Twisted Mansion', 'Shy Guy Falls'],
+                            'Star Cup':['Sunshine Airport', 'Dolphin Shoals', 'Electrodome', 'Mount Wario'],
+                            'Speccial Cup':['Cloudtop Cruise', 'Bone-Dry Dunes', "Bowser's Castle", 'Rainbow Road'],
+                            'Egg Cup':['Yoshi Circuit', 'Excitebike Arena', 'Dragon Driftway', 'Mute City'],
+                            'Crossing Cup':['Baby Park', 'Cheese Land', 'Wild Woods', 'Animal Crossing'] },
+                        2: {'Shell Cup':['Moo Moo Meaows', 'Mario Circuit', 'Cheep Cheep Beach', "Toad's Turnpike"],
+                            'Banana Cup':['Dry Dry Desert', 'Donut Plain 3', 'Royal Raceway', 'DK Jungle'],
+                            'Leaf Cup':['Wario Stadium', 'Sherbet Land', 'Music Park', 'Yoshi Valley'],
+                            'Lightning Cup':['Tick-Tock Clock', 'Piranha Plant Slide', 'Grumble Volcano', 'Rainbow Road'],
+                            'Triforce Cup':["Wario's Gold Mine", 'Rainbow Road', 'Ice Ice Outpost', 'Hyrule Circuit'],
+                            'Bell Cup':['Neo Bowser City', 'Ribbon Road', 'Super Bell Subway', 'Big Blue']},
+                        3: {'Golden Dash Cup':['Paris Promenade', 'Toad Circuit', 'Chco Mountain', 'Coconut Mall'],
+                            'Lucky Cat Cup':['Tokyo Blur', 'Shroom Ridge', 'Sky Garden', 'Ninja Hideway'],
+                            'Turnip Cup':['New York Minute', 'Mario Circuit 3', 'Kalimari Desert', 'Waluigi Pinball'],
+                            'Propeller Cup':['Sydney Sprint', 'Snow Land', 'Mushroom Gorge', 'Sky-High Sundae'],
+                            'Rock Cup':['London Loop', 'Boo Lake', 'Rock Rock Mountain', 'Maple Treeway'],
+                            'Moon Cup':['Berlin Byways', 'Peach Gardens', 'Merry Mountain', 'Rainbow Road']},
+                        4: {'Fruit Cup':['Amsterdan Drift', 'Riverside Park', 'DK Summit', "Yoshi's Island"],
+                            'Boomerang Cup':['Bangkok Rush', 'Mario Circuit', 'Waluigi Stadium', 'Singapore Speedway'],
+                            'Feather Cup':['Athens Dash', 'Daisy Cruiser', 'Moonview Highway', 'Squeaky Clean Spirit'],
+                            'Cherry Cup':['Los Angeles Laps', 'Sunset Wilds', 'Koopa Cape', 'Vancouver Velocity'],
+                            'Acorn Cup':['Rome Avanti', 'DK Mountain', 'Daisy Circuit', 'Pirnha Plant Cove'],
+                            'Spiny Cup':['Madrid Drive', "Rosalina's Ice World", 'Bowser Castle 3', 'Rainbow Road']} }
+        
+    # Translates from numbers to the course cup and track for printing
+    for i in range(COURSES):
+        while(course not in courseList[course_row][course_col]):
+            course_row = random.randint(1, COURSE_ROW)
+            course_col = random.randint(1, COURSE_COL)
+            course = random.randint(1,4)
+        courseList[course_row][course_col].remove(course)
+        cupList = list(courseNamesList[course_row].keys())
+
+        cup = (cupList[course_col - 1])
+        track = courseNamesList[course_row][cup][course - 1]
+        print(f'\tCOURSE {i+1}: {cup}: {track}')
+
+
+if __name__ == "__main__":
+
     # Player input for playing the game, how many players, and how many courses
     playChoice = "yes"
     while(playChoice.lower() == "yes"):
@@ -84,109 +163,45 @@ if __name__ == "__main__":
         COURSES = int(input("\nHow many Courses? (MAX of 48)\n"))
         while COURSES not in {1, 4, 6, 8, 12, 16, 24, 32, 48}:
             COURSES = int(input("How many Courses? (MAX of 48)\n"))
-                
+
         itemList = ['Banana Peel', 'Triple Banana Peels', 'Green Shell', 'Triple Green Shells',
         'Red Shell', 'Triple Red Shells','Blue Shell', 'Bomb-omb', 'Mushroom', 'Triple Mushroom',
         'Golden/Queen Mushroom', 'Bullet Bill', 'Blooper', 'Lightning', 'Star','Fireflower', 'Boomerang',
         'Piranha Plant', 'Boom Box', '8', 'Coin', 'Boo']
+        numItemsList = len(itemList)
 
         #input for random vs set number
-        random_set_i = input("Do you want a random number of items (random) or a set a number of items (set) \n")
+        random_set_i = input("\nDo you want a random number of items (random) or a set a number of items (set)? \n")
         while True:
             match random_set_i.lower():
                 case "random":
-                    max_items = int(input("What is the max number of items \n"))
+                    max_items = int(input(f"What is the max number of items you wish to randomize? (MAX of {numItemsList})\n"))
                     random_set_b = True
                 case "set":
-                    max_items = int(input("How many items do you want? \n"))
+                    max_items = int(input(f"How many items do you want? (MAX of {numItemsList})\n"))
                     random_set_b = False
                 case _:
-                    random_set_i = input("Do you want a random number of items (random) or a set a number of items (set) \n")
-            if ((max_items > 0) and (max_items <= 22)):
+                    random_set_i = input("\nDo you want a random number of items (random) or a set a number of items (set) \n")
+            if ((max_items > 0) and (max_items <= numItemsList)):
                 break
-        
-        print(f'max items {max_items} and random {random_set_i}, {random_set_b}')
-        COURSE_ROW = 4
-        COURSE_COL = 6
-        
 
-        # Character Print
-        print('\nCHARACTER')
-        for i in range(players):
-            character = random.randint(1, len(characters) - 1)
-            print(f'\tPlayer {i+1}: {characters[character]}')
+        #character roll
+        characters()
         
-        # Kart Print
-        print('\nKART')
-        for i in range(players):
-            print(f'\tPlayer {i+1}: {random.randint(1, KART)}')
+        #kart roll
+        karts()
         
-        # Wheel Print
-        print('\nWHEEL')
-        for i in range(players):
-            print(f'\tPlayer {i+1}: {random.randint(1, WHEEL)}')
+        #wheel roll
+        wheels()
         
-        # Glider Print
-        print('\nGLIDER')
-        for i in range(players):
-            print(f'\tPlayer {i+1}: {random.randint(1, GLIDE)}')
-        
+        #glider roll
+        gliders()
 
         # Items logic
-
-        print('\nITEMS')
-
         items(random_set_b, max_items)
 
-
         # Course logic   
-        print('\nCOURSE')
-        course = random.randint(1,4)
-        course_row = random.randint(1, COURSE_ROW)
-        course_col = random.randint(1, COURSE_COL)
-        
-        courseList = {1:{1:[1, 2, 3, 4],2:[1, 2, 3, 4],3:[1, 2, 3, 4],4:[1, 2, 3, 4],5:[1, 2, 3, 4],6:[1, 2, 3, 4]},
-        2:{1:[1, 2, 3, 4],2:[1, 2, 3, 4],3:[1, 2, 3, 4],4:[1, 2, 3, 4],5:[1, 2, 3, 4],6:[1, 2, 3, 4]},
-        3:{1:[1, 2, 3, 4],2:[1, 2, 3, 4],3:[1, 2, 3, 4],4:[1, 2, 3, 4],5:[1, 2, 3, 4],6:[1, 2, 3, 4]},
-        4:{1:[1, 2, 3, 4],2:[1, 2, 3, 4],3:[1, 2, 3, 4],4:[1, 2, 3, 4],5:[1, 2, 3, 4],6:[1, 2, 3, 4]}}
-        
-        courseNamesList = { 1: {'Mushroom Cup':['Mario Kart Stadium', 'Water Park', 'Sweet Sweet Canyon', 'Thwomp Ruins'],
-                                'Flower Cup':['Mario Circuit', 'Toad Harbor', 'Twisted Mansion', 'Shy Guy Falls'],
-                                'Star Cup':['Sunshine Airport', 'Dolphin Shoals', 'Electrodome', 'Mount Wario'],
-                                'Speccial Cup':['Cloudtop Cruise', 'Bone-Dry Dunes', "Bowser's Castle", 'Rainbow Road'],
-                                'Egg Cup':['Yoshi Circuit', 'Excitebike Arena', 'Dragon Driftway', 'Mute City'],
-                                'Crossing Cup':['Baby Park', 'Cheese Land', 'Wild Woods', 'Animal Crossing'] },
-                            2: {'Shell Cup':['Moo Moo Meaows', 'Mario Circuit', 'Cheep Cheep Beach', "Toad's Turnpike"],
-                                'Banana Cup':['Dry Dry Desert', 'Donut Plain 3', 'Royal Raceway', 'DK Jungle'],
-                                'Leaf Cup':['Wario Stadium', 'Sherbet Land', 'Music Park', 'Yoshi Valley'],
-                                'Lightning Cup':['Tick-Tock Clock', 'Piranha Plant Slide', 'Grumble Volcano', 'Rainbow Road'],
-                                'Triforce Cup':["Wario's Gold Mine", 'Rainbow Road', 'Ice Ice Outpost', 'Hyrule Circuit'],
-                                'Bell Cup':['Neo Bowser City', 'Ribbon Road', 'Super Bell Subway', 'Big Blue']},
-                            3: {'Golden Dash Cup':['Paris Promenade', 'Toad Circuit', 'Chco Mountain', 'Coconut Mall'],
-                                'Lucky Cat Cup':['Tokyo Blur', 'Shroom Ridge', 'Sky Garden', 'Ninja Hideway'],
-                                'Turnip Cup':['New York Minute', 'Mario Circuit 3', 'Kalimari Desert', 'Waluigi Pinball'],
-                                'Propeller Cup':['Sydney Sprint', 'Snow Land', 'Mushroom Gorge', 'Sky-High Sundae'],
-                                'Rock Cup':['London Loop', 'Boo Lake', 'Rock Rock Mountain', 'Maple Treeway'],
-                                'Moon Cup':['Berlin Byways', 'Peach Gardens', 'Merry Mountain', 'Rainbow Road']},
-                            4: {'Fruit Cup':['Amsterdan Drift', 'Riverside Park', 'DK Summit', "Yoshi's Island"],
-                                'Boomerang Cup':['Bangkok Rush', 'Mario Circuit', 'Waluigi Stadium', 'Singapore Speedway'],
-                                'Feathers Cup':['Athens Dash', 'Daisy Cruiser', 'Moonview Highway', 'Squeaky Clean Spirit'],
-                                'Cherry Cup':['Los Angeles Laps', 'Sunset Wilds', 'Koopa Cape', 'Vancouver Velocity'],
-                                'Acorn Cup':['Rome Avanti', 'DK Mountain', 'Daisy Circuit', 'Pirnha Plant Cove'],
-                                'Spiny Cup':['Madrid Drive', "Rosalina's Ice World", 'Bowser Castle 3', 'Rainbow Road']} }
-        
-        # Translates from numbers to the course cup and track for printing
-        for i in range(COURSES):
-            while(course not in courseList[course_row][course_col]):
-                course_row = random.randint(1, COURSE_ROW)
-                course_col = random.randint(1, COURSE_COL)
-                course = random.randint(1,4)
-            courseList[course_row][course_col].remove(course)
-            cupList = list(courseNamesList[course_row].keys())
-
-            cup = (cupList[course_col - 1])
-            track = courseNamesList[course_row][cup][course - 1]
-            print(f'\tCOURSE {i+1}: {cup}: {track}')
+        courses()
         
         playChoice = input("\nWould you like to play? (YES/NO)\n")
     print("Kill yourself ong")
