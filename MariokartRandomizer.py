@@ -4,6 +4,9 @@ import time
 random.seed(time.time())
 
 # Global Constants
+KART = 40
+WHEEL = 21
+GLIDE = 15
 
 ITEM_ROW = 4
 ITEM_COL = 6
@@ -61,7 +64,6 @@ def items(random_set_b, max_items):
         print(f'\tITEM {i+1}: {item}')
 
 def characters():
-    # Characters List
     characters = ['Mario', 'Luigi', 'Peach', 'Daisy', 'Rosalina', 'Tanooki Mario', 'Cat Peach', birdo(),
             yoshi(), 'Toad', 'Koopa Troopa', shyGuy(), 'Lakitu', 'Toadette', 'King Boo', 'Petey Piranha',
             'Baby Mario', 'Baby Luigi', 'Baby Peach', 'Baby Daisy', 'Baby Rosalina', 'Metal Mario', 'Pink Gold Peach', 'Wiggly',
@@ -113,6 +115,7 @@ def gliders():
     for i in range(players):
         rand_value = random.randint(1, len(gildeList) - 1)
         print(f'\tPlayer {i+1}: {rand_value} \t{gildeList[rand_value]}')
+
 
 
 def courses():
