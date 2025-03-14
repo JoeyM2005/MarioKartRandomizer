@@ -8,10 +8,6 @@ This is created for almost anything choice-related in Mario Kart 8 Deluxe. Coded
 - Course Randomizer
 
 ## TODO:
-- How tf do you use github with vscode bruh???
-- Fix logic for ensuring non-duplicates (chars, items, courses, etc.)
-- Functions for each randomizer
-- Fill with characters and change random to select from list
 - Hopefully, each player could be a class with the kart parts as variables (also implement other classes for things)
   
 - ### Start on website stuff

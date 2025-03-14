@@ -3,15 +3,6 @@ import time
 
 random.seed(time.time())
 
-# Global Constants
-KART = 40
-WHEEL = 21
-GLIDE = 15
-
-ITEM_ROW = 4
-ITEM_COL = 6
-
-
 # More Advanced Player Randomization
 def birdo():
     birdos = ['Birdo (Pink)', 'Birdo (Light Blue)', 'Birdo (Black)', 'Birdo (Red)',
@@ -66,7 +57,7 @@ def items(random_set_b, max_items):
 def characters():
     characters = ['Mario', 'Luigi', 'Peach', 'Daisy', 'Rosalina', 'Tanooki Mario', 'Cat Peach', birdo(),
             yoshi(), 'Toad', 'Koopa Troopa', shyGuy(), 'Lakitu', 'Toadette', 'King Boo', 'Petey Piranha',
-            'Baby Mario', 'Baby Luigi', 'Baby Peach', 'Baby Daisy', 'Baby Rosalina', 'Metal Mario', 'Pink Gold Peach', 'Wiggly',
+            'Baby Mario', 'Baby Luigi', 'Baby Peach', 'Baby Daisy', 'Baby Rosalina', metalMario(), 'Pink Gold Peach', 'Wiggly',
             'Wario', 'Waluigi', 'Donkey Kong', 'Bowser', 'Dry Bones', 'Bowser Jr.', 'Dry Bowser', 'Kamek',
             'Lemmy', 'Lary', 'Wendy', 'Ludwig', 'Iggy', 'Roy', 'Morton', 'Peachette',
             inkling(), villager(), 'Isabelle', link(), 'Diddy Kong', 'Funky Kong', 'Pauline']
