@@ -80,8 +80,8 @@ def karts():
     # Kart Print
     print('\nKART')
     for i in range(players):
-        rand_value = random.randint(1, len(kartList) - 1)
-        print(f'\tPlayer {i+1}: {rand_value} \t{kartList[rand_value]}')
+        rand_value = random.randint(0, len(kartList) - 1)
+        print(f'\tPlayer {i+1}: {rand_value + 1} \t{kartList[rand_value]}')
 
 def wheels():
     # Wheel List
@@ -92,8 +92,8 @@ def wheels():
     # Wheel Print
     print('\nWHEEL')
     for i in range(players):
-        rand_value = random.randint(1, len(wheelList) - 1)
-        print(f'\tPlayer {i+1}: {rand_value} \t{wheelList[rand_value]}')
+        rand_value = random.randint(0, len(wheelList) - 1)
+        print(f'\tPlayer {i+1}: {rand_value + 1} \t{wheelList[rand_value]}')
 
 def gliders():
     # Glide List
@@ -104,8 +104,8 @@ def gliders():
     # Glider Print
     print('\nGLIDER')
     for i in range(players):
-        rand_value = random.randint(1, len(gildeList) - 1)
-        print(f'\tPlayer {i+1}: {rand_value} \t{gildeList[rand_value]}')
+        rand_value = random.randint(0, len(gildeList) - 1)
+        print(f'\tPlayer {i+1}: {rand_value + 1} \t{gildeList[rand_value]}')
 
 
 
