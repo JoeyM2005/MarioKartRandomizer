@@ -184,7 +184,8 @@ if __name__ == "__main__":
         numItemsList = len(itemList)
 
         #input for random vs set number
-        random_set_i = input("\nDo you want a random number of items (random) or a set a number of items (set)? \n")
+        random_set_i = input("\nDo you want a random number of items (random), set a number of items (set), or no random items (none)? \n")
+        randomItems = True
         while True:
             match random_set_i.lower():
                 case "random":
@@ -193,6 +194,8 @@ if __name__ == "__main__":
                 case "set":
                     max_items = int(input(f"How many items do you want? (MAX of {numItemsList})\n"))
                     random_set_b = False
+                case "none":
+                    randomItems = False
                 case _:
                     random_set_i = input("\nDo you want a random number of items (random) or a set a number of items (set) \n")
             if ((max_items > 0) and (max_items <= numItemsList)):
@@ -211,7 +214,8 @@ if __name__ == "__main__":
         gliders()
 
         # Items logic
-        items(random_set_b, max_items)
+        if(randomItems):
+            items(random_set_b, max_items)
 
         # Course logic   
         courses()
