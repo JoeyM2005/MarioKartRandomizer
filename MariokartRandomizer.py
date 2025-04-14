@@ -196,6 +196,7 @@ if __name__ == "__main__":
                     random_set_b = False
                 case "none":
                     randomItems = False
+                    max_items = 1
                 case _:
                     random_set_i = input("\nDo you want a random number of items (random) or a set a number of items (set) \n")
             if ((max_items > 0) and (max_items <= numItemsList)):
