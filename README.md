@@ -8,7 +8,7 @@ This is created for almost anything choice-related in Mario Kart 8 Deluxe. Coded
 - Course Randomizer
 
 ### Not in website:
-- For personal use there is a calculator file so users can input scores and it will output to a file to keep track of scores in the terminal
+- For personal use there is a calculator file so users can input scores and it will output to a file to keep track of scores in the txt file it saves
 
 ## TODO:
 - Hopefully, each player could be a class with the kart parts as variables (also implement other classes for things)
