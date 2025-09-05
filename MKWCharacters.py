@@ -2,6 +2,23 @@ import random
 import time
 random.seed(time.time())
 
+def characters(players):
+    characters = [Mario(), Luigi(), Peach(), Daisy(), Yoshi(), Toad(), KoopaTroopa(), Bowser(),
+                  Wario(), Waluigi(), Rosalina(), Pauline(), BabyMario(), BabyLuigi(),
+                  BabyPeach(), BabyDaisy(), Lakitu(), Toadette(), Bowserjr(), 
+                  BabyRosalina(), Birdo(), KingBoo(), ShyGuy(), DonkeyKong(), 'Nabbit', 
+                  'Piranha Plant', 'Hammer Bro', 'Monty Mole', 'Goomba', 'Spike', 'Side Stepper', 
+                  'Cheep Cheep', 'DryBones', 'Wiggler', 'Cataquack', 'Pianta', 'Rocky Wrench',
+                  'Pokey', 'Peepa', 'Stingby', 'Cow', 'Snowman', 'Penguin', 'Para-Biddybud',
+                  "Chargin' Chuck"]
+    
+    
+    # Character Print
+    print('\nCHARACTER:')
+    for i in range(players):
+        character = random.randint(1, len(characters) - 1)
+        print(f'\tPlayer {i+1}: {characters[character]}')
+
 def Mario():
     Marios = ['Mario', 'Mechanic Mario', 'Sightseeing Mario', 'All-Terrain Mario',
               'Touring Mario', 'Dune Rider Mario', 'Aviator Mario', 'Pro Racer Mario'
