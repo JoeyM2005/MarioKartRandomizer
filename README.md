@@ -1,6 +1,6 @@
 # Mario Kart Randomizer
 
-This is created for almost anything choice-related in Mario Kart 8 Deluxe. Coded in Python and maybe other languages.
+This is created for almost anything choice-related in Mario Kart 8 Deluxe and Mario Kart World. Coded in Python and maybe other languages.
 
 - Character Randomizer
 - Kart/Wheel/Glider Randomizer
