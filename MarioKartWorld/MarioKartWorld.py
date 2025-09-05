@@ -2,10 +2,6 @@ import random
 import time
 
 #imports
-from MKWCharacters import Mario, Luigi, Peach, Daisy, Yoshi, Toad, KoopaTroopa, Bowser
-from MKWCharacters import Wario, Waluigi, Rosalina, Pauline, BabyMario, BabyLuigi
-from MKWCharacters import BabyPeach, BabyDaisy, Lakitu, Toadette, Bowserjr 
-from MKWCharacters import BabyRosalina, Birdo, KingBoo, ShyGuy, DonkeyKong
 from MKWCharacters import characters
 from MKWItems import items
 from MKWCourses import courses
