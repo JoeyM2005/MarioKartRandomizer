@@ -219,7 +219,7 @@ if __name__ == "__main__":
             items(random_set_b, max_items)
 
         # Course logic   
-        courses()
+        courses() 
         
         playChoice = input("\nWould you like to play? (YES/NO)\n")
     print("Kill yourself ong")
