@@ -2,6 +2,7 @@ import random
 import time
 random.seed(time.time())
 
+
 def characters(players):
     characters = [Mario(), Luigi(), Peach(), Daisy(), Yoshi(), Toad(), KoopaTroopa(), Bowser(),
                   Wario(), Waluigi(), Rosalina(), Pauline(), BabyMario(), BabyLuigi(),
@@ -72,7 +73,7 @@ def Bowserjr():
 
 def KoopaTroopa():
     KoopaTroopas = ['Pro Racer Koopa Troopa', 'Koopa Troopa', 'Sailor Koopa Troopa'
-                    'Runner Koopa Troopa', 'All-Terrain Koopa Troopa' 'Work Crew Koopa Troopa']
+                    'Runner Koopa Troopa', 'All-Terrain Koopa Troopa', 'Work Crew Koopa Troopa']
     m_num = random.randint(0, len(KoopaTroopas) - 1)
     return KoopaTroopas[m_num]
 
@@ -160,3 +161,11 @@ def BabyRosalina():
     m_num = random.randint(0, len(BabyRosalinas) - 1)
     return BabyRosalinas[m_num]
 
+
+"""
+if __name__ == "__main__":
+
+    players = 4
+    for i in range(50):
+        characters(players)
+"""
