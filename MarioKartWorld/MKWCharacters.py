@@ -10,7 +10,7 @@ def characters(players):
                   BabyRosalina(), Birdo(), KingBoo(), ShyGuy(), DonkeyKong(), 'Nabbit', 
                   'Piranha Plant', 'Hammer Bro', 'Monty Mole', 'Goomba', 'Spike', 'Side Stepper', 
                   'Cheep Cheep', 'DryBones', 'Wiggler', 'Cataquack', 'Pianta', 'Rocky Wrench',
-                  'Pokey', 'Peepa', 'Stingby', 'Cow', 'Snowman', 'Penguin', 'Para-Biddybud',
+                  'Pokey', 'Peepa', 'Coin Coffer', 'Stingby', 'Cow', 'Snowman', 'Penguin', 'Para-Biddybud',
                   "Chargin' Chuck"]
     
     
