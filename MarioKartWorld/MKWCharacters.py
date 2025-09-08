@@ -11,7 +11,7 @@ def characters(players):
                   'Piranha Plant', 'Hammer Bro', 'Monty Mole', 'Goomba', 'Spike', 'Side Stepper', 
                   'Cheep Cheep', 'DryBones', 'Wiggler', 'Cataquack', 'Pianta', 'Rocky Wrench',
                   'Pokey', 'Peepa', 'Coin Coffer', 'Stingby', 'Cow', 'Snowman', 'Penguin', 'Para-Biddybud',
-                  "Chargin' Chuck"]
+                  "Chargin' Chuck", "Swoop"]
     
     
     # Character Print
