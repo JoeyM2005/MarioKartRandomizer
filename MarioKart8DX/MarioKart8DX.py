@@ -14,7 +14,7 @@ if __name__ == "__main__":
 
     # Player input for playing the game, how many players, and how many courses
     playChoice = "yes"
-    while(playChoice.lower() == "yes"):
+    while(playChoice.lower() == "yes" or playChoice.lower() == "y"):
         max_items = -1
     
         players = int(input("\nHow many players? (MAX of 4)\n"))
@@ -43,10 +43,10 @@ if __name__ == "__main__":
                     random_set_b = False
                 case "none":
                     random_set_b = False
-                    max_items = 1
+                    max_items = 0
                 case _:
                     random_set_i = input("\nDo you want a random number of items (random) or a set a number of items (set) \n")
-            if ((max_items > 0) and (max_items <= itemListLength())):
+            if (((max_items > 0) and (max_items <= itemListLength())) or random_set_i.lower() == 'none'):
                 break
 
 
@@ -70,4 +70,4 @@ if __name__ == "__main__":
         courses(COURSES) 
         
         playChoice = input("\nWould you like to play? (YES/NO)\n")
-    print("Kill yourself ong")
+    print("Thank you for using the randomizer")

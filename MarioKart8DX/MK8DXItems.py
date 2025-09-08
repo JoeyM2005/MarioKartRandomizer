@@ -29,11 +29,13 @@ def calcuitem(random_set_b=False, max_items=-1):
     for i in range(max_items):
         item = itemlisttemp[random.randint(0, itemlistlengthtemp - 1)]
         itemlisttemp.remove(item)
+        itemlistlengthtemp-=1
                 
         print(f'\tITEM {i+1}: {item}')
 
 def items(random_set_b, max_items):
         
-        #input for random vs set number
-        if(randomItem()):
-            calcuitem(random_set_b, max_items)
+        if(max_items != 0):
+            #input for random vs set number
+            if(randomItem()):
+                calcuitem(random_set_b, max_items)
