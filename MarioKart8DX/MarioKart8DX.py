@@ -42,7 +42,7 @@ if __name__ == "__main__":
                     max_items = int(input(f"How many items do you want? (MAX of {itemListLength()})\n"))
                     random_set_b = False
                 case "none":
-                    randomItems = False
+                    random_set_b = False
                     max_items = 1
                 case _:
                     random_set_i = input("\nDo you want a random number of items (random) or a set a number of items (set) \n")

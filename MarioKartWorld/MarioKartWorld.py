@@ -22,7 +22,6 @@ if __name__ == "__main__":
         while COURSES not in {1, 3, 4, 5, 6, 8, 12, 16, 32}: 
             COURSES = int(input("How many Courses? (MAX of 32)\n"))
 
-
         #character roll
         characters(players) #imported
         
@@ -36,4 +35,4 @@ if __name__ == "__main__":
         courses(COURSES) #imported
         
         playChoice = input("\nWould you like to play? (YES/NO)\n")
-    print("Kill yourself ong")
+    print("Thank you for using the randomizer")
