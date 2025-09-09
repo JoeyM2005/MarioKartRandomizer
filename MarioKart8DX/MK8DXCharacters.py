@@ -17,46 +17,46 @@ def characters(players):
         character = random.randint(1, len(characters) - 1)
         print(f'\tPlayer {i+1}: {characters[character]}')
 
-
+def randomCharVar(charList):
+    m_num = random.randint(0, len(charList) - 1)
+    return charList[m_num]
 
 def birdo():
     birdos = ['Birdo (Pink)', 'Birdo (Light Blue)', 'Birdo (Black)', 'Birdo (Red)',
     'Birdo (Yellow)', 'Birdo (White)', 'Birdo (Blue)', 'Birdo (Green)', 'Birdo (Orange)']
-    b_num = random.randint(0, len(birdos) - 1)
-    return birdos[b_num]
+    return randomCharVar(birdos)
 
 def yoshi():
     yoshis = ['Green Yoshi', 'Light-blue Yoshi', 'Black Yoshi', 'Red Yoshi',
     'Yellow Yoshi', 'Black Yoshi', 'Blue Yoshi', 'Pink Yoshi', 'Orange Yoshi']
-    y_num = random.randint(0, len(yoshis) - 1)
-    return yoshis[y_num]
+    return randomCharVar(yoshis)
 
 def inkling():
     inklings = ['Inkling Girl (Orange)', 'Inkling Girl (Green)', 'Inkling Girl (Pink)',
     'Inkling Boy (Blue)', 'Inkling Boy (Purple)', 'Inkling Boy (Light-blue)']
-    i_num = random.randint(0, len(inklings) - 1)
-    return inklings[i_num]
+    return randomCharVar(inklings)
 
 def villager():
     villagers = ['Villager (Boy)', 'Villager (Girl)']
-    v_num = random.randint(0, len(villagers) - 1)
-    return villagers[v_num]
+    return randomCharVar(villagers)
     
 def link():
     links = ['Link (Champion Tunic)', 'Link (Classic)']
-    l_num = random.randint(0, len(links) - 1)
-    return links[l_num]
+    return randomCharVar(links)
     
 def metalMario():
     metalMarios = ['Gold Mario', 'Metal Mario']
-    m_num = random.randint(0, len(metalMarios) - 1)
-    return metalMarios[m_num]
+    return randomCharVar(metalMarios)
 
 def shyGuy():
     shyGuys = ['Red Shy Guy', 'Light-Blue Shy Guy', 'Black Shy Guy', 'Green Shy Guy',
     'Yellow Shy Guy', 'White Shy Guy', 'Blue Shy Guy', 'Pink Shy Guy', 'Orange Shy Guy']
-    s_num = random.randint(0, len(shyGuys) - 1)
-    return shyGuys[s_num]
+    return randomCharVar(shyGuys)
 
+"""
+if __name__ == "__main__":
 
-
+    players = 4
+    for i in range(50):
+        characters(players)
+"""

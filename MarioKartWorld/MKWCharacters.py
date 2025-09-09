@@ -20,146 +20,126 @@ def characters(players):
         character = random.randint(1, len(characters) - 1)
         print(f'\tPlayer {i+1}: {characters[character]}')
 
+def randomCharVar(charList):
+    m_num = random.randint(0, len(charList) - 1)
+    return charList[m_num]
+
 def Mario():
     Marios = ['Mario', 'Mechanic Mario', 'Sightseeing Mario', 'All-Terrain Mario',
               'Touring Mario', 'Dune Rider Mario', 'Aviator Mario', 'Pro Racer Mario'
               'Cowboy Mario', 'Happi Mario']
-    m_num = random.randint(0, len(Marios) - 1)
-    return Marios[m_num]
+    return randomCharVar(Marios)
     
 def Luigi():
     Luigis = ['Luigi', 'Touring Luigi', 'Pro Racer Luigi', 'Farmer Luigi',
               'Gondolier Luigi', 'Mechanic Luigi', 'Happi Luigi', 
               'Oasis Luigi', 'All-Terrain Luigi']
-    m_num = random.randint(0, len(Luigis) - 1)
-    return Luigis[m_num]
+    return randomCharVar(Luigis)
 
 def Peach():
     Peaches = ['Pro Racer Peach', 'Peach', 'Farmer Peach', 'Touring Peach', 
               'Sightseeing Peach', 'Aviator Peach', 'Vacation Peach', 
               'Yukato Peach', 'Aero Peach']
-    m_num = random.randint(0, len(Peaches) - 1)
-    return Peaches[m_num]
+    return randomCharVar(Peaches)
 
 def Daisy():
     Daisies = ['Pro Racer Daisy', 'Aero Daisy', 'Daisy', 'Oasis Daisy', 
                'Vacation Daisy', 'Touring Daisy', 'Swimwear Daisy']
-    m_num = random.randint(0, len(Daisies) - 1)
-    return Daisies[m_num]
+    return randomCharVar(Daisies)
 
 def Yoshi():
-    Yoshies = ['Yoshi', 'Touring Yoshi', 'Soft Server Yoshi', 'Matsuri Yoshi',
+    Yoshis = ['Yoshi', 'Touring Yoshi', 'Soft Server Yoshi', 'Matsuri Yoshi',
                'Pro Racer Yoshi', 'Biker Yoshi', 'Food Slinger Yoshi', 
                'Aristocrat Yoshi', 'Swimwear Yoshi']
-    m_num = random.randint(0, len(Yoshies) - 1)
-    return Yoshies[m_num]
+    return randomCharVar(Yoshis)
 
 def DonkeyKong():
     DonkeyKongs = ['All-Terrain Donkey Kong', 'Donkey Kong`']
-    m_num = random.randint(0, len(DonkeyKongs) - 1)
-    return DonkeyKongs[m_num]
+    return randomCharVar(DonkeyKongs)
 
 def Bowser():
     Bowsers = ['Bowser', 'Pro Racer Bowser', 'Supercharged Bowser', 'Biker Bowser',
                'All-Terrain Bowser']
-    m_num = random.randint(0, len(Bowsers) - 1)
-    return Bowsers[m_num]
+    return randomCharVar(Bowsers)
 
 def Bowserjr():
     Bowserjrs = ['Bowser Jr.', 'Explorer Bowser Jr.', 'Pro Racer Bowser Jr.',
                   'Biker Jr Bowser Jr']
-    m_num = random.randint(0, len(Bowserjrs) - 1)
-    return Bowserjrs[m_num]
+    return randomCharVar(Bowserjrs)
 
 def KoopaTroopa():
     KoopaTroopas = ['Pro Racer Koopa Troopa', 'Koopa Troopa', 'Sailor Koopa Troopa'
                     'Runner Koopa Troopa', 'All-Terrain Koopa Troopa', 'Work Crew Koopa Troopa']
-    m_num = random.randint(0, len(KoopaTroopas) - 1)
-    return KoopaTroopas[m_num]
+    return randomCharVar(KoopaTroopas)
 
 def Toad():
     Toads = ['Engineer Toad', 'Toad', 'Burger Bud Toad', 'Pro Racer Toad', 'Explorer Toad']
-    m_num = random.randint(0, len(Toads) - 1)
-    return Toads[m_num]
+    return randomCharVar(Toads)
 
 def Toadette():
     Toadettes = ['Toadette', 'Soft Server Toadette', 'Pro Racer Toadette', 'Explorer Toadette',
                  'Conductor Toadette']
-    m_num = random.randint(0, len(Toadettes) - 1)
-    return Toadettes[m_num]
+    return randomCharVar(Toadettes)
 
 def Lakitu():
     Lakitus = ['Lakitu', 'Pit Crew Lakitu', 'Fisherman Lakitu']
-    m_num = random.randint(0, len(Lakitus) - 1)
-    return Lakitus[m_num]
+    return randomCharVar(Lakitus)
 
 def KingBoo():
     KingBoos = ['Pro Racer King Boo', 'Aristocrat King Boo', 'King Boo', 'Pirate King Boo']
-    m_num = random.randint(0, len(KingBoos) - 1)
-    return KingBoos[m_num]
+    return randomCharVar(KingBoos)
 
 def ShyGuy():
     ShyGuys = ['Shy Guy', 'Pit Crew Shy Guy', 'Slope Styler Shy Guy']
-    m_num = random.randint(0, len(ShyGuys) - 1)
-    return ShyGuys[m_num]
+    return randomCharVar(ShyGuys)
 
 def Wario():
     Warios = ['Wario', 'Pro Racer Wario', 'Oasis Wario', 'Wicked Wasp Wario', 
               'Road Ruffian Wario', 'Biker Wario', 'Work Crew Wario', 
               'Pirate Wario']
-    m_num = random.randint(0, len(Warios) - 1)
-    return Warios[m_num]
+    return randomCharVar(Warios)
 
 def Waluigi():
     Waluigis = ['Pro Racer Waluigi', 'Biker Waluigi', 'Wampire Waluigi', 
                 'Road Ruffian Waluigi', 'Waluigi', 'Mariachi Waluigi']
-    m_num = random.randint(0, len(Waluigis) - 1)
-    return Waluigis[m_num]
+    return randomCharVar(Waluigis)
 
 def Birdo():
     Birdos = ['Birdo', 'Pro Racer Birdo', 'Vacation Birdo']
-    m_num = random.randint(0, len(Birdos) - 1)
-    return Birdos[m_num]
+    return randomCharVar(Birdos)
 
 def Pauline():
     Paulines = ['Aero Pauline', 'Pauline']
-    m_num = random.randint(0, len(Paulines) - 1)
-    return Paulines[m_num]
+    return randomCharVar(Paulines)
 
 def Rosalina():
     Rosalinas = ['Pro Racer Rosalina', 'Rosalina', 'Aurora Rosalina', 
                  'Touring Rosalina', 'Aero Rosalina']
-    m_num = random.randint(0, len(Rosalinas) - 1)
-    return Rosalinas[m_num]
+    return randomCharVar(Rosalinas)
 
 def BabyMario():
     BabyMarios = ['Baby Mario', 'Pro Racer Baby Mario', 'Swimwear Baby Mario',
                   'Work Crew Baby Mario']
-    m_num = random.randint(0, len(BabyMarios) - 1)
-    return BabyMarios[m_num]
+    return randomCharVar(BabyMarios)
 
 def BabyLuigi():
     BabyLuigis = ['Work Crew Baby Luigi', 'Baby Luigi', 'Pro Racer Baby Luigi']
-    m_num = random.randint(0, len(BabyLuigis) - 1)
-    return BabyLuigis[m_num]
+    return randomCharVar(BabyLuigis)
 
 def BabyPeach():
     BabyPeaches = ['Pro Racer Baby Peach', 'Baby Peach', 'Sailor Baby Peach',
                    'Touring Baby Peach', 'Explorer Baby Peach']
-    m_num = random.randint(0, len(BabyPeaches) - 1)
-    return BabyPeaches[m_num]
+    return randomCharVar(BabyPeaches)
 
 def BabyDaisy():
     BabyDaisies = ['Baby Daisy', 'Touring Baby Daisy', 'Pro Racer Baby Daisy',
                     'Sailor Baby Daisy', 'Explorer Baby Daisy']
-    m_num = random.randint(0, len(BabyDaisies) - 1)
-    return BabyDaisies[m_num]
+    return randomCharVar(BabyDaisies)
 
 def BabyRosalina():
     BabyRosalinas = ['Touring Baby Rosalina', 'Explorer Baby Rosalina', 
                      'Pro Racer Baby Rosalina', 'Baby Rosalina', 'Sailor Baby Rosalina']
-    m_num = random.randint(0, len(BabyRosalinas) - 1)
-    return BabyRosalinas[m_num]
+    return randomCharVar(BabyRosalinas)
 
 
 """
