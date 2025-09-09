@@ -2,7 +2,7 @@ import random
 import time
 from MK8DXCharacters import characters
 from MK8DXCombos import karts, gliders, wheels
-from MK8DXItems import items, itemListLength, randomItem
+from MK8DXItems import items, itemListLength
 from MK8DXCourses import courses
 
 random.seed(time.time())
@@ -32,7 +32,7 @@ if __name__ == "__main__":
 
         #input for random vs set number
         random_set_i = input("\nDo you want a random number of items (random), set a number of items (set), or no random items (none)? \n")
-        randomItem(True)
+
         while True:
             match random_set_i.lower():
                 case "random":
@@ -45,10 +45,9 @@ if __name__ == "__main__":
                     random_set_b = False
                     max_items = 0
                 case _:
-                    random_set_i = input("\nDo you want a random number of items (random) or a set a number of items (set) \n")
+                    random_set_i = input("\nDo you want a random number of items (random), set a number of items (set), or no random items (none)? \n")
             if (((max_items > 0) and (max_items <= itemListLength())) or random_set_i.lower() == 'none'):
                 break
-
 
         
         #character roll

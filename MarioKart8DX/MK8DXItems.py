@@ -15,27 +15,18 @@ def itemListLength():
      itemlist = itemList()
      return len(itemlist)
 
-def randomItem(value=True):
-    randomItems = value
-    return randomItems
-
 def calcuitem(random_set_b=False, max_items=-1):
-    itemlisttemp = itemList()
-    itemlistlengthtemp = itemListLength()
     if random_set_b:
         max_items = random.randint(1, max_items)
 
     print('\nITEMS')
-    for i in range(max_items):
-        item = itemlisttemp[random.randint(0, itemlistlengthtemp - 1)]
-        itemlisttemp.remove(item)
-        itemlistlengthtemp-=1
-                
-        print(f'\tITEM {i+1}: {item}')
+    randomItems = random.sample(itemList(), max_items)
+    
+    for i in range(len(randomItems)):
+        print(f'\tITEM {i+1}: {randomItems[i]}')
 
 def items(random_set_b, max_items):
         
         if(max_items != 0):
             #input for random vs set number
-            if(randomItem()):
-                calcuitem(random_set_b, max_items)
+            calcuitem(random_set_b, max_items)
