@@ -1,6 +1,6 @@
 # Mario Kart Randomizer
 
-This is created for almost anything choice-related in Mario Kart 8 Deluxe and Mario Kart World. Coded in Python and maybe other languages.
+This is created for almost anything choice-related in Mario Kart 8 Deluxe and Mario Kart World. Coded in Python and maybe other languages if we decide to.
 
 - Character Randomizer
 - Kart/Wheel/Glider Randomizer
@@ -8,15 +8,11 @@ This is created for almost anything choice-related in Mario Kart 8 Deluxe and Ma
 - Course Randomizer
 
 ### Not in website:
-- For personal use there is a calculator file so users can input scores and it will output to a file to keep track of scores in the txt file it saves
+- For personal use there is a calculator file in the MK8DX folder so users can input scores and it will output to a file to keep track of scores in the txt file it saves
 
 ## TODO:
 - Hopefully, each player could be a class with the kart parts as variables (also implement other classes for things)
-  
-- ### Start on website stuff
-  Once website is working, work on more features such as:
-  - Premade sets of items vs truly random
-  - selectable randomness (user inputs number of random things)
 
 ## SPRITES:
-- https://www.spriters-resource.com/nintendo_switch/mariokart8deluxe/sheet/94161/
+- MK8: https://www.spriters-resource.com/nintendo_switch/mariokart8deluxe/sheet/94161/
+- MK World: https://www.mariowiki.com/Gallery:Mario_Kart_World
