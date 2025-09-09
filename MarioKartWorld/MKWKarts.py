@@ -4,7 +4,7 @@ random.seed(time.time())
 
 def karts(players):
     # Kart List
-    kartList = ['Standard Kart', 'PlushBuggy', 'Zoom Buggy', 'Rally Kart', 'Baby Blooper',
+    kartList = ['Standard Kart', 'Plushbuggy', 'Zoom Buggy', 'Rally Kart', 'Baby Blooper',
                 "Chargin' Truck", 'Standard Bike', 'Cute Scoot', 'Hyper Pipe', 
                 'Rally Bike', 'Mach Rocket', 'Funky Dorrie', 'Hot Rod', 'Roadster Royale',
                 'Biddybuggy', 'Ribbit Revster', 'B Dasher', 'Tiny Titan', 'Tune Thumper', 
