@@ -14,5 +14,9 @@ This is created for almost anything choice-related in Mario Kart 8 Deluxe and Ma
 - Hopefully, each player could be a class with the kart parts as variables (also implement other classes for things)
 
 ## SPRITES:
-- MK8: https://www.spriters-resource.com/nintendo_switch/mariokart8deluxe/sheet/94161/
-- MK World: https://www.mariowiki.com/Gallery:Mario_Kart_World
+MK8:
+- https://www.mariowiki.com/Gallery:Mario_Kart_8
+- https://www.spriters-resource.com/nintendo_switch/mariokart8deluxe
+
+MK World:
+- https://www.mariowiki.com/Gallery:Mario_Kart_World
