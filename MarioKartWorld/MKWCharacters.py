@@ -9,9 +9,9 @@ def characters(players):
                   BabyPeach(), BabyDaisy(), Lakitu(), Toadette(), Bowserjr(), 
                   BabyRosalina(), Birdo(), KingBoo(), ShyGuy(), DonkeyKong(), 'Nabbit', 
                   'Piranha Plant', 'Hammer Bro', 'Monty Mole', 'Goomba', 'Spike', 'Side Stepper', 
-                  'Cheep Cheep', 'DryBones', 'Wiggler', 'Cataquack', 'Pianta', 'Rocky Wrench',
+                  'Cheep Cheep', 'Dry Bones', 'Wiggler', 'Cataquack', 'Pianta', 'Rocky Wrench',
                   'Pokey', 'Peepa', 'Coin Coffer', 'Stingby', 'Cow', 'Snowman', 'Penguin', 'Para-Biddybud',
-                  "Chargin' Chuck", 'Swoop']
+                  "Chargin' Chuck", 'Swoop', 'Conkdor', 'Dolphin', 'Fish Bones']
     
     
     # Character Print
