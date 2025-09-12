@@ -27,6 +27,7 @@ This is created for almost anything choice-related in Mario Kart 8 Deluxe and Ma
 MK8:
 - https://www.mariowiki.com/Gallery:Mario_Kart_8
 - https://www.spriters-resource.com/nintendo_switch/mariokart8deluxe
+- https://mariokart8.nintendo.com
 
 MK World:
 - https://www.mariowiki.com/Gallery:Mario_Kart_World
