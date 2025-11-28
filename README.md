@@ -10,7 +10,7 @@ This is created for almost anything choice-related in Mario Kart 8 Deluxe and Ma
 ### Not in website:
 - For personal use there is a calculator file in the MK8DX folder so users can input scores and it will output to a file to keep track of scores in the txt file it saves
 
-### Run through terminal:
+### Run through terminal: (I forgot you cant download individual folders so sorry about that, you'll be mainly downloading sprites unless you can download just the World or 8DX folders)
 1. I think you have to install python, but I'm not really sure because I already had python to begin with
 2. Download the project to a zip file and unzip it
 3. Open the terminal and copy and paste either the MK8DX command or MKWorld command
