@@ -3,8 +3,6 @@ import time
 
 random.seed(time.time())
 
-randomItems = True
-
 def itemList():
     return ['Banana Peel', 'Triple Banana Peels', 'Green Shell', 'Triple Green Shells',
         'Red Shell', 'Triple Red Shells','Blue Shell', 'Bomb-omb', 'Mushroom', 'Triple Mushroom',

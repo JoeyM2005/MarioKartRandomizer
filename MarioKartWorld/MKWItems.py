@@ -19,9 +19,6 @@ def items():
     #print(f'Frantic: {results.count('Frantic')}')
 '''
 
-
-randomItems = True
-
 def itemList():
     return ['Coin', 'Green Shell', 'Triple Green Shells', 'Red Shell', 'Triple Red Shells', 'Blue Shell',
             'Banana Peel', 'Triple Banana Peels', 'Mushroom', 'Triple Mushrooms', 'Golden Mushroom',
