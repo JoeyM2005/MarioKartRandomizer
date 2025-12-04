@@ -16,7 +16,7 @@ This is created for almost anything choice-related in Mario Kart 8 Deluxe and Ma
 3. Open the terminal and copy and paste either the MK8DX command or MKWorld command
    - cd Downloads/MarioKartRandomizer-main\MarioKartRandomizer-main/MarioKart8DX
    - cd Downloads/MarioKartRandomizer-main\MarioKartRandomizer-main/MarioKartWorld
-4. Copy and paste either the corresponding python run command for which game you selected previously
+4. Copy and paste the corresponding python run command for which game you selected previously
    - python MarioKart8DX.py
    - python MarioKartWorld.py
 
