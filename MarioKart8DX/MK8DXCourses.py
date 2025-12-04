@@ -48,10 +48,10 @@ def courses(COURSES):
             course_row = random.randint(1, COURSE_ROW)
             course_col = random.randint(1, COURSE_COL)
             course = random.randint(1,4)
-        courseList[course_row][course_col].remove(course)
-        cupList = list(courseNamesList[course_row].keys())
+        courseList[course_row][course_col].remove(course)#removes num val from courseList
+        cupList = list(courseNamesList[course_row].keys())#makes list of cups from the specific row
 
-        cup = (cupList[course_col - 1])
-        track = courseNamesList[course_row][cup][course - 1]
+        cup = (cupList[course_col - 1])#translates the col num into name of Cup
+        track = courseNamesList[course_row][cup][course - 1]#uses row, cup, and course num to get name of track
         print(f'\tCOURSE {i+1}: {cup}: {track}')
 
