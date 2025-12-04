@@ -20,7 +20,7 @@ def courses(COURSES):
     courseNamesList = { 1: {'Mushroom Cup':['Mario Kart Stadium', 'Water Park', 'Sweet Sweet Canyon', 'Thwomp Ruins'],
                             'Flower Cup':['Mario Circuit', 'Toad Harbor', 'Twisted Mansion', 'Shy Guy Falls'],
                             'Star Cup':['Sunshine Airport', 'Dolphin Shoals', 'Electrodome', 'Mount Wario'],
-                            'Speccial Cup':['Cloudtop Cruise', 'Bone-Dry Dunes', "Bowser's Castle", 'Rainbow Road'],
+                            'Special Cup':['Cloudtop Cruise', 'Bone-Dry Dunes', "Bowser's Castle", 'Rainbow Road'],
                             'Egg Cup':['Yoshi Circuit', 'Excitebike Arena', 'Dragon Driftway', 'Mute City'],
                             'Crossing Cup':['Baby Park', 'Cheese Land', 'Wild Woods', 'Animal Crossing'] },
                         2: {'Shell Cup':['Moo Moo Meaows', 'Mario Circuit', 'Cheep Cheep Beach', "Toad's Turnpike"],
