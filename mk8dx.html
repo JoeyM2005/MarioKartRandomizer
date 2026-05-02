@@ -372,7 +372,7 @@ const IMG = {
     'Birdo (Green)':      'MarioKartSprites/MK8DXSprites/MK8DXCharacters/MK8D_Birdo_Green_Emblem.png',
     'Birdo (Orange)':     'MarioKartSprites/MK8DXSprites/MK8DXCharacters/MK8D_Birdo_Orange_Emblem.png',
     'Green Yoshi':        'MarioKartSprites/MK8DXSprites/MK8DXCharacters/MK8_Green_Yoshi_Emblem.png',
-    'Light-blue Yoshi':   'MarioKartSprites/MK8DXSprites/MK8DXCharacters/MK8_Light_Blue_Yoshi_Emblem.png',
+    'Light-Blue Yoshi':   'MarioKartSprites/MK8DXSprites/MK8DXCharacters/MK8_Light_Blue_Yoshi_Emblem.png',
     'Black Yoshi':        'MarioKartSprites/MK8DXSprites/MK8DXCharacters/MK8_Black_Yoshi_Emblem.png',
     'Red Yoshi':          'MarioKartSprites/MK8DXSprites/MK8DXCharacters/MK8_Red_Yoshi_Emblem.png',
     'Yellow Yoshi':       'MarioKartSprites/MK8DXSprites/MK8DXCharacters/MK8_Yellow_Yoshi_Emblem.png',
@@ -494,11 +494,11 @@ const IMG = {
     'Blooper':              'MarioKartSprites/MK8DXSprites/MK8DXItems/MK8_Blooper.png',
     'Lightning':            'MarioKartSprites/MK8DXSprites/MK8DXItems/MK8_Lightning.png',
     'Star':                 'MarioKartSprites/MK8DXSprites/MK8DXItems/MK8_Star.png',
-    'Fireflower':           'MarioKartSprites/MK8DXSprites/MK8DXItems/MK8_Fire_Flower.png',
+    'Fire flower':          'MarioKartSprites/MK8DXSprites/MK8DXItems/MK8_Fire_Flower.png',
     'Boomerang':            'MarioKartSprites/MK8DXSprites/MK8DXItems/MK8_Boomerang.png',
     'Piranha Plant':        'MarioKartSprites/MK8DXSprites/MK8DXItems/MK8_Piranha_Plant.png',
     'Boom Box':             'MarioKartSprites/MK8DXSprites/MK8DXItems/MK8_Super_Horn.png',
-    '8':                    'MarioKartSprites/MK8DXSprites/MK8DXItems/MK8_Crazy_8.png',
+    'Crazy 8':              'MarioKartSprites/MK8DXSprites/MK8DXItems/MK8_Crazy_8.png',
     'Coin':                 'MarioKartSprites/MK8DXSprites/MK8DXItems/MK8_Coin.png',
     'Boo':                  'MarioKartSprites/MK8DXSprites/MK8DXItems/MK8_Boo.png',
   },
@@ -563,15 +563,22 @@ function pickCourses(n) {
 
 // ROLL
 function rollAll() {
-  const players  = +document.getElementById('players').value;
+  const players     = +document.getElementById('players').value;
   const courseCount = +document.getElementById('courses').value;
-  const maxItems = +document.getElementById('itemCount').value;
+  const maxItems    = +document.getElementById('itemCount').value;
 
   // Characters
   const charOut = document.getElementById('out-chars');
   charOut.innerHTML = '';
   for (let i = 0; i < players; i++) {
-    charOut.innerHTML += row(`P${i+1}`, randomChar(), i+1);
+    const char = randomChar();
+    charOut.innerHTML += `
+      <div class="result-row">
+        <span class="result-num">${i+1}</span>
+        ${sprite(IMG.characters, char, 40)}
+        <span class="result-label">P${i+1}</span>
+        <span class="result-value">${char}</span>
+      </div>`;
   }
 
   // Kart builds
@@ -584,10 +591,15 @@ function rollAll() {
     kartOut.innerHTML += `
       <div class="result-row">
         <span class="result-num">${i+1}</span>
+        ${sprite(IMG.karts, kart, 40)}
         <span class="result-label">P${i+1}</span>
         <div class="kart-detail">
           <span class="result-value">${kart}</span>
-          <span class="kart-parts">Wheels: ${wheels} &bull; Glider: ${glider}</span>
+          <div class="kart-parts" style="display:flex;align-items:center;gap:6px;flex-wrap:wrap">
+            ${sprite(IMG.wheels, wheels, 28)} ${wheels}
+            &bull;
+            ${sprite(IMG.gliders, glider, 28)} ${glider}
+          </div>
         </div>
       </div>`;
   }
@@ -603,13 +615,19 @@ function rollAll() {
       ? (1 + Math.floor(Math.random() * maxItems))
       : maxItems;
     const picked = sample(ITEMS, Math.min(count, ITEMS.length));
-    itemOut.innerHTML = picked.map((item, i) => row(`Item ${i+1}`, item, i+1)).join('');
+    itemOut.innerHTML = picked.map((item, i) => `
+      <div class="result-row">
+        <span class="result-num">${i+1}</span>
+        ${sprite(IMG.items, item, 40)}
+        <span class="result-label">Item ${i+1}</span>
+        <span class="result-value">${item}</span>
+      </div>`).join('');
   }
 
-  // Courses — show cup name below track name
+  // Courses
   const courseOut = document.getElementById('out-courses');
-  const picked = pickCourses(courseCount);
-  courseOut.innerHTML = picked.map(({ cup, track }, i) => `
+  const pickedCourses = pickCourses(courseCount);
+  courseOut.innerHTML = pickedCourses.map(({ cup, track }, i) => `
     <div class="result-row">
       <span class="result-num">${i+1}</span>
       <span class="result-label">Race ${i+1}</span>
@@ -620,17 +638,23 @@ function rollAll() {
     </div>`).join('');
 
   const res = document.getElementById('results');
+  res.style.display = 'block';
   res.classList.add('show');
   res.scrollIntoView({ behavior: 'smooth', block: 'start' });
 }
-
-function row(label, value, num) {
+ 
+//row fx:
+// Updated row() for characters and items (single sprite)
+function row(label, value, num, imgMap) {
+  const img = imgMap ? sprite(imgMap, value) : '';
   return `<div class="result-row">
     <span class="result-num">${num}</span>
+    ${img}
     <span class="result-label">${label}</span>
     <span class="result-value">${value}</span>
   </div>`;
 }
+
 </script>
 </body>
 </html>
