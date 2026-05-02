@@ -1,0 +1,424 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8"/>
+<meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+<title>MK World Randomizer</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Bangers&family=Nunito:wght@400;700;900&display=swap" rel="stylesheet">
+<style>
+  *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+  :root {
+    --accent: #E8001D;
+    --accent2: #FF6B35;
+    --yellow: #FFD700;
+    --dark: #0D0D0D;
+    --card: #1a0808;
+    --card-border: rgba(232,0,29,0.25);
+    --white: #FFFDF5;
+    --muted: rgba(255,253,245,0.5);
+  }
+  body { background: var(--dark); color: var(--white); font-family: 'Nunito', sans-serif; min-height: 100vh; }
+
+  .bg-road {
+    position: fixed; inset: 0; z-index: 0;
+    background:
+      repeating-linear-gradient(90deg, transparent 0, transparent 48px, rgba(255,255,255,0.025) 48px, rgba(255,255,255,0.025) 50px),
+      repeating-linear-gradient(180deg, transparent 0, transparent 48px, rgba(255,255,255,0.025) 48px, rgba(255,255,255,0.025) 50px),
+      linear-gradient(160deg, #0D0D0D, #1a0505, #0D0D0D);
+    animation: scroll 8s linear infinite;
+  }
+  @keyframes scroll { to { background-position: 0 -96px, 0 -96px, 0 0; } }
+
+  .content { position: relative; z-index: 1; max-width: 860px; margin: 0 auto; padding: 0 20px 60px; }
+
+  /* ── NAV ── */
+  nav { display: flex; align-items: center; padding: 20px 0; gap: 16px; }
+  nav a { color: var(--muted); text-decoration: none; font-size: 14px; font-weight: 700; letter-spacing: 1px; transition: color 0.2s; }
+  nav a:hover { color: var(--white); }
+  .nav-sep { color: var(--muted); }
+
+  /* ── HEADER ── */
+  header { text-align: center; padding: 30px 0 40px; }
+  .badge {
+    display: inline-block; padding: 4px 14px; border-radius: 100px;
+    background: rgba(232,0,29,0.15); border: 1px solid rgba(232,0,29,0.4);
+    font-size: 11px; letter-spacing: 3px; text-transform: uppercase; color: var(--accent); margin-bottom: 14px;
+  }
+  h1 {
+    font-family: 'Bangers', cursive;
+    font-size: clamp(40px, 8vw, 74px);
+    line-height: 0.95;
+    color: var(--white);
+    text-shadow: 3px 3px 0 var(--accent), 6px 6px 0 #600010, 0 0 50px rgba(232,0,29,0.3);
+    letter-spacing: 2px;
+    margin-bottom: 12px;
+  }
+
+  /* ── CONFIG ── */
+  .config-grid {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 14px;
+    margin: 32px 0;
+  }
+  @media (max-width: 540px) { .config-grid { grid-template-columns: 1fr; } }
+
+  .config-block {
+    background: var(--card);
+    border: 1px solid var(--card-border);
+    border-radius: 14px;
+    padding: 18px 20px;
+  }
+  .config-block label {
+    display: block;
+    font-size: 11px;
+    letter-spacing: 2px;
+    text-transform: uppercase;
+    color: var(--muted);
+    margin-bottom: 10px;
+  }
+  select, input[type=range] {
+    width: 100%; background: rgba(255,255,255,0.05); border: 1px solid rgba(255,255,255,0.1);
+    border-radius: 8px; color: var(--white); font-family: 'Nunito', sans-serif;
+    font-size: 15px; font-weight: 700; padding: 8px 12px; outline: none;
+    appearance: none;
+  }
+  select option { background: #1a0808; }
+  .range-row { display: flex; align-items: center; gap: 12px; }
+  input[type=range] { padding: 0; accent-color: var(--accent); cursor: pointer; }
+  .range-val {
+    font-family: 'Bangers', cursive; font-size: 26px; color: var(--accent);
+    min-width: 36px; text-align: right;
+  }
+
+  /* Items row spans full width */
+  .config-block.full { grid-column: 1 / -1; }
+
+  .item-mode-row { display: flex; gap: 10px; flex-wrap: wrap; }
+  .item-mode-btn {
+    flex: 1; min-width: 90px; padding: 9px 6px; border: 1px solid rgba(255,255,255,0.12);
+    background: rgba(255,255,255,0.05); color: var(--muted); border-radius: 8px;
+    font-family: 'Nunito', sans-serif; font-weight: 900; font-size: 13px;
+    cursor: pointer; transition: all 0.15s; text-transform: uppercase; letter-spacing: 0.5px;
+  }
+  .item-mode-btn.active {
+    background: rgba(232,0,29,0.2); border-color: var(--accent); color: var(--white);
+  }
+
+  .item-count-row { margin-top: 12px; }
+
+  /* ── BIG ROLL BUTTON ── */
+  .roll-wrap { text-align: center; margin: 28px 0; }
+  .roll-btn {
+    font-family: 'Bangers', cursive;
+    font-size: 28px; letter-spacing: 3px;
+    padding: 16px 54px;
+    border: none; border-radius: 100px;
+    background: linear-gradient(135deg, var(--accent), #b8001a);
+    color: white;
+    cursor: pointer;
+    box-shadow: 0 6px 30px rgba(232,0,29,0.5), inset 0 1px 0 rgba(255,255,255,0.2);
+    transition: transform 0.15s, box-shadow 0.15s;
+    position: relative; overflow: hidden;
+  }
+  .roll-btn::before {
+    content: ''; position: absolute; inset: 0;
+    background: linear-gradient(135deg, transparent 40%, rgba(255,255,255,0.15));
+  }
+  .roll-btn:hover { transform: scale(1.04); box-shadow: 0 10px 40px rgba(232,0,29,0.65), inset 0 1px 0 rgba(255,255,255,0.25); }
+  .roll-btn:active { transform: scale(0.98); }
+
+  /* ── RESULTS ── */
+  #results { display: none; }
+  #results.show { display: block; animation: rise 0.4s ease; }
+  @keyframes rise { from { opacity: 0; transform: translateY(20px); } to { opacity: 1; transform: translateY(0); } }
+
+  .result-section {
+    background: var(--card);
+    border: 1px solid var(--card-border);
+    border-radius: 16px;
+    margin-bottom: 14px;
+    overflow: hidden;
+  }
+  .result-head {
+    display: flex; align-items: center; gap: 10px;
+    padding: 14px 20px;
+    background: rgba(232,0,29,0.08);
+    border-bottom: 1px solid var(--card-border);
+    font-size: 11px; letter-spacing: 3px; text-transform: uppercase; color: var(--accent);
+    font-weight: 900;
+  }
+  .result-head .icon { font-size: 18px; }
+  .result-body { padding: 10px 0; }
+
+  .result-row {
+    display: flex; align-items: center;
+    padding: 10px 20px; gap: 14px;
+    border-bottom: 1px solid rgba(255,255,255,0.04);
+    transition: background 0.15s;
+  }
+  .result-row:last-child { border-bottom: none; }
+  .result-row:hover { background: rgba(255,255,255,0.03); }
+  .result-label {
+    font-size: 11px; letter-spacing: 1px; text-transform: uppercase;
+    color: var(--muted); min-width: 72px;
+  }
+  .result-value { font-weight: 900; font-size: 15px; flex: 1; }
+  .result-num {
+    font-family: 'Bangers', cursive; font-size: 22px; color: var(--accent);
+    min-width: 28px; text-align: right;
+  }
+
+  /* re-roll */
+  .reroll-wrap { text-align: center; margin-top: 20px; }
+  .reroll-btn {
+    background: transparent; border: 1px solid rgba(232,0,29,0.4);
+    color: var(--accent); font-family: 'Nunito', sans-serif; font-weight: 900;
+    font-size: 14px; letter-spacing: 1px; text-transform: uppercase;
+    padding: 10px 28px; border-radius: 100px; cursor: pointer; transition: all 0.2s;
+  }
+  .reroll-btn:hover { background: rgba(232,0,29,0.12); border-color: var(--accent); }
+</style>
+</head>
+<body>
+<div class="bg-road"></div>
+<div class="content">
+  <nav>
+    <a href="index.html">← Home</a>
+    <span class="nav-sep">/</span>
+    <span style="color:var(--white);font-weight:900">MK World</span>
+  </nav>
+
+  <header>
+    <div class="badge">Nintendo Switch 2</div>
+    <h1>MARIO KART<br>WORLD</h1>
+    <p style="color:var(--muted);font-size:15px;margin-top:8px">Configure your race, then roll the dice</p>
+  </header>
+
+  <!-- CONFIG -->
+  <div class="config-grid">
+    <div class="config-block">
+      <label>Players</label>
+      <div class="range-row">
+        <input type="range" id="players" min="1" max="4" value="2" oninput="syncRange('players','pval')">
+        <span class="range-val" id="pval">2</span>
+      </div>
+    </div>
+
+    <div class="config-block">
+      <label>Courses</label>
+      <select id="courses">
+        <option value="1">1 Course</option>
+        <option value="3">3 Courses</option>
+        <option value="4" selected>4 Courses (GP)</option>
+        <option value="5">5 Courses</option>
+        <option value="6">6 Courses</option>
+        <option value="8">8 Courses</option>
+        <option value="12">12 Courses</option>
+        <option value="16">16 Courses</option>
+        <option value="32">32 Courses (All)</option>
+      </select>
+    </div>
+
+    <div class="config-block full">
+      <label>Items</label>
+      <div class="item-mode-row">
+        <button class="item-mode-btn" onclick="setItemMode('none')">None</button>
+        <button class="item-mode-btn active" onclick="setItemMode('set')">Set Count</button>
+        <button class="item-mode-btn" onclick="setItemMode('random')">Random Count</button>
+      </div>
+      <div class="item-count-row" id="itemCountRow">
+        <label style="margin-top:12px">Number of items: <span id="ival" style="color:var(--accent);font-weight:900">3</span></label>
+        <input type="range" id="itemCount" min="1" max="28" value="3"
+               oninput="document.getElementById('ival').textContent=this.value">
+      </div>
+    </div>
+  </div>
+
+  <div class="roll-wrap">
+    <button class="roll-btn" onclick="rollAll()">ROLL EVERYTHING</button>
+  </div>
+
+  <!-- RESULTS -->
+  <div id="results">
+    <div class="result-section" id="sec-char">
+      <div class="result-head">Characters</div>
+      <div class="result-body" id="out-chars"></div>
+    </div>
+    <div class="result-section" id="sec-kart">
+      <div class="result-head">Karts</div>
+      <div class="result-body" id="out-karts"></div>
+    </div>
+    <div class="result-section" id="sec-items" style="display:none">
+      <div class="result-head">Items</div>
+      <div class="result-body" id="out-items"></div>
+    </div>
+    <div class="result-section">
+      <div class="result-head">Courses</div>
+      <div class="result-body" id="out-courses"></div>
+    </div>
+    <div class="reroll-wrap">
+      <button class="reroll-btn" onclick="rollAll()">Roll Again</button>
+    </div>
+  </div>
+</div>
+
+<script>
+// (ported from your Python files)
+
+const KARTS = [
+  'Standard Kart','Plushbuggy','Zoom Buggy','Rally Kart','Baby Blooper',
+  "Chargin' Truck",'Standard Bike','Cute Scoot','Hyper Pipe',
+  'Rally Bike','Mach Rocket','Funky Dorrie','Hot Rod','Roadster Royale',
+  'Biddybuggy','Ribbit Revster','B Dasher','Tiny Titan','Tune Thumper',
+  'W-Twon Chopper','Dread Sled','Junkyard Hog','Lobster Roller',
+  'Stellar Sled','Reel Racer','Carpet Flyer','Big Horn','Bumble V','Cloud 9',
+  "Li'l Dumpy",'Fin Twin','Dolphin Dasher','Loco Moto','R.O.B. H.O.G.',
+  'Blastronaut III','Mecha Trike','Pipe Frame','Bulldozer','Rallygator',
+  'Bowser Bruiser'
+];
+
+const COURSES = [
+  'Mario Bros. Circuit','Crown City','Whistle Summit','DK Spaceport',
+  'Desert Hills','Shy Guy Bazaar','Wario Stadium','Airship Fortress',
+  'DK Pass','Starview Peak','Sky-High Sundae','Wario Shipyard',
+  'Koopa Troopa Beach','Faraway Oasis','Peach Stadium','Peach Beach',
+  'Salty Salty Speedway','Dino Dino Jungle','Great ? Block Ruins',
+  'Cheep Cheep Falls','Dandelion Deaths','Boo Cinema','Dry Bones Burnout',
+  'Moo Moo Meadows','Choco Mountain',"Toad's Factory","Bowser's Castle",
+  'Acorn Heights','Mario Circuit','Rainbow Road',
+  'Koopa Troopa Park','Mushroom Gorge' // fill to 32 unique
+];
+
+const ITEMS = [
+  'Coin','Green Shell','Triple Green Shells','Red Shell','Triple Red Shells','Blue Shell',
+  'Banana Peel','Triple Banana Peels','Mushroom','Triple Mushrooms','Golden Mushroom',
+  'Mega Mushroom','Feather','Fire Flower','Ice Flower','Boomerang Flower','Star',
+  'Super Horn','Lightning','Hammer','Blooper','Bob-omb','Bullet Bill','Boo','Coin Shell',
+  '? Block','Kamek','Dash Food'
+];
+
+// Character variants
+const CHAR_VARIANTS = {
+  Mario: ['Mario','Mechanic Mario','Sightseeing Mario','All-Terrain Mario','Touring Mario','Dune Rider Mario','Aviator Mario','Pro Racer Mario','Cowboy Mario','Happi Mario'],
+  Luigi: ['Luigi','Touring Luigi','Pro Racer Luigi','Farmer Luigi','Gondolier Luigi','Mechanic Luigi','Happi Luigi','Oasis Luigi','All-Terrain Luigi'],
+  Peach: ['Pro Racer Peach','Peach','Farmer Peach','Touring Peach','Sightseeing Peach','Aviator Peach','Vacation Peach','Yukata Peach','Aero Peach'],
+  Daisy: ['Pro Racer Daisy','Aero Daisy','Daisy','Oasis Daisy','Vacation Daisy','Touring Daisy','Swimwear Daisy'],
+  Yoshi: ['Yoshi','Touring Yoshi','Soft Server Yoshi','Matsuri Yoshi','Pro Racer Yoshi','Biker Yoshi','Food Slinger Yoshi','Aristocrat Yoshi','Swimwear Yoshi'],
+  DonkeyKong: ['All-Terrain Donkey Kong','Donkey Kong'],
+  Bowser: ['Bowser','Pro Racer Bowser','Supercharged Bowser','Biker Bowser','All-Terrain Bowser'],
+  BowserJr: ['Bowser Jr.','Explorer Bowser Jr.','Pro Racer Bowser Jr.','Biker Bowser Jr.'],
+  KoopaTroopa: ['Pro Racer Koopa Troopa','Koopa Troopa','Sailor Koopa Troopa','Runner Koopa Troopa','All-Terrain Koopa Troopa','Work Crew Koopa Troopa'],
+  Toad: ['Engineer Toad','Toad','Burger Bud Toad','Pro Racer Toad','Explorer Toad'],
+  Toadette: ['Toadette','Soft Server Toadette','Pro Racer Toadette','Explorer Toadette','Conductor Toadette'],
+  Lakitu: ['Lakitu','Pit Crew Lakitu','Fisherman Lakitu'],
+  KingBoo: ['Pro Racer King Boo','Aristocrat King Boo','King Boo','Pirate King Boo'],
+  ShyGuy: ['Shy Guy','Pit Crew Shy Guy','Slope Styler Shy Guy'],
+  Wario: ['Wario','Pro Racer Wario','Oasis Wario','Wicked Wasp Wario','Road Ruffian Wario','Biker Wario','Work Crew Wario','Pirate Wario'],
+  Waluigi: ['Pro Racer Waluigi','Biker Waluigi','Wampire Waluigi','Road Ruffian Waluigi','Waluigi','Mariachi Waluigi'],
+  Birdo: ['Birdo','Pro Racer Birdo','Vacation Birdo'],
+  Pauline: ['Aero Pauline','Pauline'],
+  Rosalina: ['Pro Racer Rosalina','Rosalina','Aurora Rosalina','Touring Rosalina','Aero Rosalina'],
+  BabyMario: ['Baby Mario','Pro Racer Baby Mario','Swimwear Baby Mario','Work Crew Baby Mario'],
+  BabyLuigi: ['Work Crew Baby Luigi','Baby Luigi','Pro Racer Baby Luigi'],
+  BabyPeach: ['Pro Racer Baby Peach','Baby Peach','Sailor Baby Peach','Touring Baby Peach','Explorer Baby Peach'],
+  BabyDaisy: ['Baby Daisy','Touring Baby Daisy','Pro Racer Baby Daisy','Sailor Baby Daisy','Explorer Baby Daisy'],
+  BabyRosalina: ['Touring Baby Rosalina','Explorer Baby Rosalina','Pro Racer Baby Rosalina','Baby Rosalina','Sailor Baby Rosalina'],
+};
+
+const SIMPLE_CHARS = [
+  'Nabbit','Piranha Plant','Hammer Bro','Monty Mole','Goomba','Spike','Side Stepper',
+  'Cheep Cheep','Dry Bones','Wiggler','Cataquack','Pianta','Rocky Wrench',
+  'Pokey','Peepa','Coin Coffer','Stingby','Cow','Snowman','Penguin','Para-Biddybud',
+  "Chargin' Chuck",'Swoop','Conkdor','Dolphin','Fish Bones'
+];
+
+// Build flat character pool
+function buildCharPool() {
+  const pool = [];
+  for (const variants of Object.values(CHAR_VARIANTS)) pool.push(variants);
+  for (const c of SIMPLE_CHARS) pool.push([c]);
+  return pool;
+}
+const CHAR_POOL = buildCharPool();
+
+// UTILS
+function pick(arr) { return arr[Math.floor(Math.random() * arr.length)]; }
+function sample(arr, n) {
+  const copy = [...arr];
+  for (let i = copy.length - 1; i > 0; i--) {
+    const j = Math.floor(Math.random() * (i + 1));
+    [copy[i], copy[j]] = [copy[j], copy[i]];
+  }
+  return copy.slice(0, n);
+}
+
+// STATE
+let itemMode = 'set';
+
+function setItemMode(mode) {
+  itemMode = mode;
+  document.querySelectorAll('.item-mode-btn').forEach(b => b.classList.remove('active'));
+  event.target.classList.add('active');
+  document.getElementById('itemCountRow').style.display = mode === 'none' ? 'none' : 'block';
+}
+
+function syncRange(id, valId) {
+  document.getElementById(valId).textContent = document.getElementById(id).value;
+}
+
+// ROLL
+function rollAll() {
+  const players = +document.getElementById('players').value;
+  const courseCount = +document.getElementById('courses').value;
+  const maxItems = +document.getElementById('itemCount').value;
+
+  // Characters
+  const charOut = document.getElementById('out-chars');
+  charOut.innerHTML = '';
+  for (let i = 0; i < players; i++) {
+    const variants = pick(CHAR_POOL);
+    const char = pick(variants);
+    charOut.innerHTML += row(`P${i+1}`, char, i+1);
+  }
+
+  // Karts
+  const kartOut = document.getElementById('out-karts');
+  kartOut.innerHTML = '';
+  for (let i = 0; i < players; i++) {
+    kartOut.innerHTML += row(`P${i+1}`, pick(KARTS), i+1);
+  }
+
+  // Items
+  const itemSec = document.getElementById('sec-items');
+  const itemOut = document.getElementById('out-items');
+  if (itemMode === 'none') {
+    itemSec.style.display = 'none';
+  } else {
+    itemSec.style.display = 'block';
+    const count = itemMode === 'random' ? (1 + Math.floor(Math.random() * maxItems)) : maxItems;
+    const picked = sample(ITEMS, Math.min(count, ITEMS.length));
+    itemOut.innerHTML = picked.map((item, i) => row(`Item ${i+1}`, item, i+1)).join('');
+  }
+
+  // Courses
+  const courseOut = document.getElementById('out-courses');
+  const picked = sample(COURSES, Math.min(courseCount, COURSES.length));
+  courseOut.innerHTML = picked.map((c, i) => row(`Race ${i+1}`, c, i+1)).join('');
+
+  const res = document.getElementById('results');
+  res.classList.add('show');
+  res.scrollIntoView({ behavior: 'smooth', block: 'start' });
+}
+
+function row(label, value, num) {
+  return `<div class="result-row">
+    <span class="result-num">${num}</span>
+    <span class="result-label">${label}</span>
+    <span class="result-value">${value}</span>
+  </div>`;
+}
+</script>
+</body>
+</html>

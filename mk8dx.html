@@ -1,0 +1,634 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8"/>
+<meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+<title>MK8DX Randomizer</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Bangers&family=Nunito:wght@400;700;900&display=swap" rel="stylesheet">
+<style>
+  *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+  :root {
+    --accent: #0057B8;
+    --accent2: #5ba4ff;
+    --dark: #0D0D0D;
+    --card: #080c1a;
+    --card-border: rgba(0,87,184,0.25);
+    --white: #FFFDF5;
+    --muted: rgba(255,253,245,0.5);
+  }
+  body { background: var(--dark); color: var(--white); font-family: 'Nunito', sans-serif; min-height: 100vh; }
+
+  .bg-road {
+    position: fixed; inset: 0; z-index: 0;
+    background:
+      repeating-linear-gradient(90deg, transparent 0, transparent 48px, rgba(255,255,255,0.025) 48px, rgba(255,255,255,0.025) 50px),
+      repeating-linear-gradient(180deg, transparent 0, transparent 48px, rgba(255,255,255,0.025) 48px, rgba(255,255,255,0.025) 50px),
+      linear-gradient(160deg, #0D0D0D, #05050f, #0D0D0D);
+    animation: scroll 8s linear infinite;
+  }
+  @keyframes scroll { to { background-position: 0 -96px, 0 -96px, 0 0; } }
+
+  .content { position: relative; z-index: 1; max-width: 900px; margin: 0 auto; padding: 0 20px 60px; }
+
+  nav { display: flex; align-items: center; padding: 20px 0; gap: 16px; }
+  nav a { color: var(--muted); text-decoration: none; font-size: 14px; font-weight: 700; letter-spacing: 1px; transition: color 0.2s; }
+  nav a:hover { color: var(--white); }
+  .nav-sep { color: var(--muted); }
+
+  header { text-align: center; padding: 30px 0 40px; }
+  .badge {
+    display: inline-block; padding: 4px 14px; border-radius: 100px;
+    background: rgba(0,87,184,0.15); border: 1px solid rgba(0,87,184,0.4);
+    font-size: 11px; letter-spacing: 3px; text-transform: uppercase; color: var(--accent2); margin-bottom: 14px;
+  }
+  h1 {
+    font-family: 'Bangers', cursive;
+    font-size: clamp(40px, 8vw, 74px); line-height: 0.95; color: var(--white);
+    text-shadow: 3px 3px 0 var(--accent), 6px 6px 0 #001a60, 0 0 50px rgba(0,87,184,0.3);
+    letter-spacing: 2px; margin-bottom: 12px;
+  }
+
+  .config-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 14px; margin: 32px 0; }
+  @media (max-width: 540px) { .config-grid { grid-template-columns: 1fr; } }
+
+  .config-block {
+    background: var(--card); border: 1px solid var(--card-border); border-radius: 14px; padding: 18px 20px;
+  }
+  .config-block label {
+    display: block; font-size: 11px; letter-spacing: 2px; text-transform: uppercase; color: var(--muted); margin-bottom: 10px;
+  }
+  select {
+    width: 100%; background: rgba(255,255,255,0.05); border: 1px solid rgba(255,255,255,0.1);
+    border-radius: 8px; color: var(--white); font-family: 'Nunito', sans-serif;
+    font-size: 15px; font-weight: 700; padding: 8px 12px; outline: none; appearance: none;
+  }
+  select option { background: #080c1a; }
+  .range-row { display: flex; align-items: center; gap: 12px; }
+  input[type=range] { width: 100%; padding: 0; accent-color: var(--accent2); cursor: pointer; }
+  .range-val { font-family: 'Bangers', cursive; font-size: 26px; color: var(--accent2); min-width: 36px; text-align: right; }
+  .config-block.full { grid-column: 1 / -1; }
+
+  .toggle-row { display: flex; gap: 10px; flex-wrap: wrap; }
+  .toggle-btn, .item-mode-btn {
+    flex: 1; min-width: 100px; padding: 9px 6px;
+    border: 1px solid rgba(255,255,255,0.12); background: rgba(255,255,255,0.05);
+    color: var(--muted); border-radius: 8px; font-family: 'Nunito', sans-serif;
+    font-weight: 900; font-size: 13px; cursor: pointer; transition: all 0.15s;
+    text-transform: uppercase; letter-spacing: 0.5px;
+  }
+  .toggle-btn.active, .item-mode-btn.active {
+    background: rgba(0,87,184,0.2); border-color: var(--accent); color: var(--white);
+  }
+  .item-count-row { margin-top: 12px; }
+
+  .roll-wrap { text-align: center; margin: 28px 0; }
+  .roll-btn {
+    font-family: 'Bangers', cursive; font-size: 28px; letter-spacing: 3px;
+    padding: 16px 54px; border: none; border-radius: 100px;
+    background: linear-gradient(135deg, var(--accent), #003a80); color: white; cursor: pointer;
+    box-shadow: 0 6px 30px rgba(0,87,184,0.5), inset 0 1px 0 rgba(255,255,255,0.2);
+    transition: transform 0.15s, box-shadow 0.15s; position: relative; overflow: hidden;
+  }
+  .roll-btn::before { content: ''; position: absolute; inset: 0; background: linear-gradient(135deg, transparent 40%, rgba(255,255,255,0.12)); }
+  .roll-btn:hover { transform: scale(1.04); box-shadow: 0 10px 40px rgba(0,87,184,0.65); }
+  .roll-btn:active { transform: scale(0.98); }
+
+  #results { display: none; }
+  #results.show { display: block; animation: rise 0.4s ease; }
+  @keyframes rise { from { opacity: 0; transform: translateY(20px); } to { opacity: 1; transform: translateY(0); } }
+
+  .result-section {
+    background: var(--card); border: 1px solid var(--card-border);
+    border-radius: 16px; margin-bottom: 14px; overflow: hidden;
+  }
+  .result-head {
+    display: flex; align-items: center; gap: 10px; padding: 14px 20px;
+    background: rgba(0,87,184,0.08); border-bottom: 1px solid var(--card-border);
+    font-size: 11px; letter-spacing: 3px; text-transform: uppercase; color: var(--accent2); font-weight: 900;
+  }
+  .result-head .icon { font-size: 18px; }
+  .result-body { padding: 10px 0; }
+
+  .result-row {
+    display: flex; align-items: center; padding: 10px 20px; gap: 14px;
+    border-bottom: 1px solid rgba(255,255,255,0.04); transition: background 0.15s;
+  }
+  .result-row:last-child { border-bottom: none; }
+  .result-row:hover { background: rgba(255,255,255,0.03); }
+  .result-label { font-size: 11px; letter-spacing: 1px; text-transform: uppercase; color: var(--muted); min-width: 72px; }
+  .result-value { font-weight: 900; font-size: 15px; flex: 1; }
+  .result-num { font-family: 'Bangers', cursive; font-size: 22px; color: var(--accent2); min-width: 28px; text-align: right; }
+
+  .kart-detail { display: flex; flex-direction: column; flex: 1; gap: 3px; }
+  .kart-parts { font-size: 12px; color: var(--muted); font-weight: 700; }
+  .course-cup { font-size: 11px; color: var(--accent2); font-weight: 700; opacity: 0.8; }
+
+  .reroll-wrap { text-align: center; margin-top: 20px; }
+  .reroll-btn {
+    background: transparent; border: 1px solid rgba(0,87,184,0.4); color: var(--accent2);
+    font-family: 'Nunito', sans-serif; font-weight: 900; font-size: 14px; letter-spacing: 1px;
+    text-transform: uppercase; padding: 10px 28px; border-radius: 100px; cursor: pointer; transition: all 0.2s;
+  }
+  .reroll-btn:hover { background: rgba(0,87,184,0.12); border-color: var(--accent2); }
+</style>
+</head>
+<body>
+<div class="bg-road"></div>
+<div class="content">
+  <nav>
+    <a href="index.html">← Home</a>
+    <span class="nav-sep">/</span>
+    <span style="color:var(--white);font-weight:900">MK8 Deluxe</span>
+  </nav>
+
+  <header>
+    <div class="badge">Nintendo Switch</div>
+    <h1>MARIO KART 8<br>DELUXE</h1>
+    <p style="color:var(--muted);font-size:15px;margin-top:8px">Characters, kart builds, and courses — all randomized</p>
+  </header>
+
+  <div class="config-grid">
+    <div class="config-block">
+      <label>Players</label>
+      <div class="range-row">
+        <input type="range" id="players" min="1" max="4" value="2" oninput="syncRange('players','pval')">
+        <span class="range-val" id="pval">2</span>
+      </div>
+    </div>
+
+    <div class="config-block">
+      <label>Courses</label>
+      <select id="courses">
+        <option value="1">1 Course</option>
+        <option value="4" selected>4 Courses (GP)</option>
+        <option value="6">6 Courses</option>
+        <option value="8">8 Courses</option>
+        <option value="12">12 Courses</option>
+        <option value="16">16 Courses</option>
+        <option value="24">24 Courses</option>
+        <option value="32">32 Courses</option>
+        <option value="48">48 Courses (All)</option>
+      </select>
+    </div>
+
+    <div class="config-block full">
+      <label>Kart Parts to Randomize</label>
+      <div class="toggle-row">
+        <button class="toggle-btn active" id="btn-kart"   onclick="togglePart('kart')">Kart Body</button>
+        <button class="toggle-btn active" id="btn-wheels" onclick="togglePart('wheels')">Wheels</button>
+        <button class="toggle-btn active" id="btn-glider" onclick="togglePart('glider')">Glider</button>
+      </div>
+    </div>
+
+    <div class="config-block full">
+      <label>Items</label>
+      <div class="toggle-row">
+        <button class="item-mode-btn" onclick="setItemMode('none',this)">None</button>
+        <button class="item-mode-btn active" onclick="setItemMode('set',this)">Set Count</button>
+        <button class="item-mode-btn" onclick="setItemMode('random',this)">Random Count</button>
+      </div>
+      <div class="item-count-row" id="itemCountRow">
+        <label style="margin-top:12px">Number of items: <span id="ival" style="color:var(--accent2);font-weight:900">3</span></label>
+        <input type="range" id="itemCount" min="1" max="22" value="3"
+               oninput="document.getElementById('ival').textContent=this.value">
+      </div>
+    </div>
+  </div>
+
+  <div class="roll-wrap">
+    <button class="roll-btn" onclick="rollAll()">ROLL EVERYTHING</button>
+  </div>
+
+  <div id="results">
+    <div class="result-section">
+      <div class="result-head">Characters</div>
+      <div class="result-body" id="out-chars"></div>
+    </div>
+    <div class="result-section">
+      <div class="result-head">Kart Builds</div>
+      <div class="result-body" id="out-karts"></div>
+    </div>
+    <div class="result-section" id="sec-items" style="display:none">
+      <div class="result-head">Items</div>
+      <div class="result-body" id="out-items"></div>
+    </div>
+    <div class="result-section">
+      <div class="result-head">Courses</div>
+      <div class="result-body" id="out-courses"></div>
+    </div>
+    <div class="reroll-wrap">
+      <button class="reroll-btn" onclick="rollAll()">Roll Again</button>
+    </div>
+  </div>
+</div>
+
+<script>
+
+// Simple (single) characters from MK8DXCharacters.py
+const CHARS_SIMPLE = [
+  'Mario','Luigi','Peach','Daisy','Rosalina','Tanooki Mario','Cat Peach',
+  'Toad','Koopa Troopa','Lakitu','Toadette','King Boo','Petey Piranha',
+  'Baby Mario','Baby Luigi','Baby Peach','Baby Daisy','Baby Rosalina','Pink Gold Peach','Wiggler',
+  'Wario','Waluigi','Donkey Kong','Bowser','Dry Bones','Bowser Jr.','Dry Bowser','Kamek',
+  'Lemmy','Larry','Wendy','Ludwig','Iggy','Roy','Morton','Peachette',
+  'Isabelle','Diddy Kong','Funky Kong','Pauline'
+];
+
+// Variant character groups (one random variant is picked per group)
+const CHARS_VARIANT = [
+  ['Birdo (pink)','Birdo (Light Blue)','Birdo (Black)','Birdo (Red)','Birdo (Yellow)','Birdo (White)','Birdo (Blue)','Birdo (Green)','Birdo (Orange)'],
+  ['Green Yoshi','Light-Blue Yoshi','Black Yoshi','Red Yoshi','Yellow Yoshi','Blue Yoshi','Pink Yoshi','Orange Yoshi'],
+  ['Inkling Girl (Orange)','Inkling Girl (Green)','Inkling Girl (Magenta)','Inkling Boy (Blue)','Inkling Boy (Purple)','Inkling Boy (Cyan)'],
+  ['Villager (Boy)','Villager (Girl)'],
+  ['Link (Champion Tunic)','Link (Classic)'],
+  ['Gold Mario','Metal Mario'],
+  ['Red Shy Guy','Light-Blue Shy Guy','Black Shy Guy','Green Shy Guy','Yellow Shy Guy','White Shy Guy','Blue Shy Guy','Pink Shy Guy','Orange Shy Guy'],
+];
+
+// from MK8DXCombos.py
+const KARTS = [
+  'Standard Kart','Pipe Frame','Mach 8','Steel Driver','Cat Cruiser','Circuit Special','Tri-Speeder','Badwagon',
+  'Prancer','Biddybuggy','Landship','Sneeker','Sports Coupe','Gold Standard','GLA','W 25 Silver Arrow',
+  '300 SL Roadster','Blue Falcon','Tanooki Kart','B Dasher','Streetle','P-Wing','Koopa Clown','Standard Bike',
+  'Comet','Sport Bike','The Duke','Flame Rider','Varmint','Mr. Scooty','Jet Bike','Yoshi Bike','Master Cycle',
+  'Master Cycle Zero','City Tripper','Standard ATV','Wild Wiggler','Teddy Buggy','Bone Rattler','Splat Buggy',
+  'Inkstriker'
+];
+const WHEELS = [
+  'Standard','Monster','Roller','Slim','Slick','Metal','Button','Off-Road','Sponge','Wood','Cushion',
+  'Blue Standard','Hot Monster','Azure Rider','Crimson Slim','Cyber Slick','Retro Off-Road','Gold Tires',
+  'GLA Tires','Triforce Tires','Ancient Tires','Leaf Tires'
+];
+const GLIDERS = [
+  'Super Glider','Cloud Glider','Wario Wing','Waddle Wing','Peach Parasol','Parachute','Parafoil',
+  'Flower Glider','Bowser Kite','Plane Glider','MKTV Parafoil','Gold Glider','Hylian Kite',
+  'Paraglider','Paper Glider'
+];
+
+// MK8DXItems.py
+const ITEMS = [
+  'Banana Peel','Triple Banana Peels','Green Shell','Triple Green Shells',
+  'Red Shell','Triple Red Shells','Blue Shell','Bob-omb','Mushroom','Triple Mushroom',
+  'Golden/Queen Mushroom','Bullet Bill','Blooper','Lightning','Star','Fire Flower','Boomerang',
+  'Piranha Plant','Boom Box','Crazy Eight','Coin','Boo'
+];
+
+// MK8DXCourses.py — full 24-cup structure
+const CUP_DATA = [
+  { cup: 'Mushroom Cup',    tracks: ['Mario Kart Stadium','Water Park','Sweet Sweet Canyon','Thwomp Ruins'] },
+  { cup: 'Flower Cup',      tracks: ['Mario Circuit','Toad Harbor','Twisted Mansion','Shy Guy Falls'] },
+  { cup: 'Star Cup',        tracks: ['Sunshine Airport','Dolphin Shoals','Electrodome','Mount Wario'] },
+  { cup: 'Special Cup',     tracks: ["Cloudtop Cruise",'Bone-Dry Dunes',"Bowser's Castle",'Rainbow Road'] },
+  { cup: 'Egg Cup',         tracks: ['Yoshi Circuit','Excitebike Arena','Dragon Driftway','Mute City'] },
+  { cup: 'Crossing Cup',    tracks: ['Baby Park','Cheese Land','Wild Woods','Animal Crossing'] },
+  { cup: 'Shell Cup',       tracks: ['Moo Moo Meadows','Mario Circuit','Cheep Cheep Beach',"Toad's Turnpike"] },
+  { cup: 'Banana Cup',      tracks: ['Dry Dry Desert','Donut Plains 3','Royal Raceway','DK Jungle'] },
+  { cup: 'Leaf Cup',        tracks: ['Wario Stadium','Sherbet Land','Music Park','Yoshi Valley'] },
+  { cup: 'Lightning Cup',   tracks: ['Tick-Tock Clock','Piranha Plant Slide','Grumble Volcano','Rainbow Road'] },
+  { cup: 'Triforce Cup',    tracks: ["Wario's Gold Mine",'Rainbow Road','Ice Ice Outpost','Hyrule Circuit'] },
+  { cup: 'Bell Cup',        tracks: ['Neo Bowser City','Ribbon Road','Super Bell Subway','Big Blue'] },
+  { cup: 'Golden Dash Cup', tracks: ['Paris Promenade','Toad Circuit','Choco Mountain','Coconut Mall'] },
+  { cup: 'Lucky Cat Cup',   tracks: ['Tokyo Blur','Shroom Ridge','Sky Garden','Ninja Hideaway'] },
+  { cup: 'Turnip Cup',      tracks: ['New York Minute','Mario Circuit 3','Kalimari Desert','Waluigi Pinball'] },
+  { cup: 'Propeller Cup',   tracks: ['Sydney Sprint','Snow Land','Mushroom Gorge','Sky-High Sundae'] },
+  { cup: 'Rock Cup',        tracks: ['London Loop','Boo Lake','Rock Rock Mountain','Maple Treeway'] },
+  { cup: 'Moon Cup',        tracks: ['Berlin Byways','Peach Gardens','Merry Mountain','Rainbow Road'] },
+  { cup: 'Fruit Cup',       tracks: ['Amsterdam Drift','Riverside Park','DK Summit',"Yoshi's Island"] },
+  { cup: 'Boomerang Cup',   tracks: ['Bangkok Rush','Mario Circuit','Waluigi Stadium','Singapore Speedway'] },
+  { cup: 'Feather Cup',     tracks: ['Athens Dash','Daisy Cruiser','Moonview Highway','Squeaky Clean Sprint'] },
+  { cup: 'Cherry Cup',      tracks: ['Los Angeles Laps','Sunset Wilds','Koopa Cape','Vancouver Velocity'] },
+  { cup: 'Acorn Cup',       tracks: ['Rome Avanti','DK Mountain','Daisy Circuit','Piranha Plant Cove'] },
+  { cup: 'Spiny Cup',       tracks: ['Madrid Drive',"Rosalina's Ice World",'Bowser Castle 3','Rainbow Road'] },
+];
+
+// IMAGE MAPS
+// Value is the path to the image file in your repo.
+
+const IMG = {
+  characters: {
+    'Mario':              'MarioKartSprites/MK8DXSprites/MK8DXCharacters/MK8_Mario_Emblem.png',
+    'Luigi':              'MarioKartSprites/MK8DXSprites/MK8DXCharacters/MK8_Luigi_Emblem.png',
+    'Peach':              'MarioKartSprites/MK8DXSprites/MK8DXCharacters/MK8_Peach_Emblem.png',
+    'Daisy':              'MarioKartSprites/MK8DXSprites/MK8DXCharacters/MK8_Daisy_Emblem.png',
+    'Rosalina':           'MarioKartSprites/MK8DXSprites/MK8DXCharacters/MK8_Rosalina_Emblem.png',
+    'Tanooki Mario':      'MarioKartSprites/MK8DXSprites/MK8DXCharacters/MK8_Tanooki_Mario_Emblem.png',
+    'Cat Peach':          'MarioKartSprites/MK8DXSprites/MK8DXCharacters/MK8_Cat_Peach_Emblem.png',
+    'Toad':               'MarioKartSprites/MK8DXSprites/MK8DXCharacters/MK8_Toad_Emblem.png',
+    'Koopa Troopa':       'MarioKartSprites/MK8DXSprites/MK8DXCharacters/MK8_Koopa_Troopa_Emblem.png',
+    'Shy Guy':            'MarioKartSprites/MK8DXSprites/MK8DXCharacters/MK8_Shy_Guy_Emblem.png',
+    'Lakitu':             'MarioKartSprites/MK8DXSprites/MK8DXCharacters/MK8_Lakitu_Emblem.png',
+    'Toadette':           'MarioKartSprites/MK8DXSprites/MK8DXCharacters/MK8_Toadette_Emblem.png',
+    'King Boo':           'MarioKartSprites/MK8DXSprites/MK8DXCharacters/MK8D_King_Boo_Emblem.png',
+    'Petey Piranha':      'MarioKartSprites/MK8DXSprites/MK8DXCharacters/MK8D_Petey_Piranha_Emblem.png',
+    'Baby Mario':         'MarioKartSprites/MK8DXSprites/MK8DXCharacters/MK8_Baby_Mario_Emblem.png',
+    'Baby Luigi':         'MarioKartSprites/MK8DXSprites/MK8DXCharacters/MK8_Baby_Luigi_Emblem.png',
+    'Baby Peach':         'MarioKartSprites/MK8DXSprites/MK8DXCharacters/MK8_Baby_Peach_Emblem.png',
+    'Baby Daisy':         'MarioKartSprites/MK8DXSprites/MK8DXCharacters/MK8_Baby_Daisy_Emblem.png',
+    'Baby Rosalina':      'MarioKartSprites/MK8DXSprites/MK8DXCharacters/MK8_Baby_Rosalina_Emblem.png',
+    'Metal Mario':        'MarioKartSprites/MK8DXSprites/MK8DXCharacters/MK8_Metal_Mario_Emblem.png',
+    'Gold Mario':         'MarioKartSprites/MK8DXSprites/MK8DXCharacters/MK8D_Gold_Mario_Emblem.png',
+    'Pink Gold Peach':    'MarioKartSprites/MK8DXSprites/MK8DXCharacters/MK8_Pink_Gold_Peach_Emblem.png',
+    'Wiggler':            'MarioKartSprites/MK8DXSprites/MK8DXCharacters/MK8D_Wiggler_Emblem.png',
+    'Wario':              'MarioKartSprites/MK8DXSprites/MK8DXCharacters/MK8_Wario_Emblem.png',
+    'Waluigi':            'MarioKartSprites/MK8DXSprites/MK8DXCharacters/MK8_Waluigi_Emblem.png',
+    'Donkey Kong':        'MarioKartSprites/MK8DXSprites/MK8DXCharacters/MK8_Donkey_Kong_Emblem.png',
+    'Bowser':             'MarioKartSprites/MK8DXSprites/MK8DXCharacters/MK8_Bowser_Emblem.png',
+    'Dry Bones':          'MarioKartSprites/MK8DXSprites/MK8DXCharacters/MK8D_Dry_Bones_Emblem.png',
+    'Bowser Jr.':         'MarioKartSprites/MK8DXSprites/MK8DXCharacters/MK8D_Bowser_Jr_Emblem.png',
+    'Dry Bowser':         'MarioKartSprites/MK8DXSprites/MK8DXCharacters/MK8_Dry_Bowser_Emblem.png',
+    'Kamek':              'MarioKartSprites/MK8DXSprites/MK8DXCharacters/MK8D_Kamek_Emblem.png',
+    'Lemmy':              'MarioKartSprites/MK8DXSprites/MK8DXCharacters/MK8_Lemmy_Emblem.png',
+    'Larry':              'MarioKartSprites/MK8DXSprites/MK8DXCharacters/MK8_Larry_Emblem.png',
+    'Wendy':              'MarioKartSprites/MK8DXSprites/MK8DXCharacters/MK8_Wendy_Emblem.png',
+    'Ludwig':             'MarioKartSprites/MK8DXSprites/MK8DXCharacters/MK8_Ludwig_Emblem.png',
+    'Iggy':               'MarioKartSprites/MK8DXSprites/MK8DXCharacters/MK8_Iggy_Emblem.png',
+    'Roy':                'MarioKartSprites/MK8DXSprites/MK8DXCharacters/MK8_Roy_Emblem.png',
+    'Morton':             'MarioKartSprites/MK8DXSprites/MK8DXCharacters/MK8_Morton_Emblem.png',
+    'Peachette':          'MarioKartSprites/MK8DXSprites/MK8DXCharacters/MK8D_Peachette_Emblem.png',
+    'Inkling Girl (Orange)':    'MarioKartSprites/MK8DXSprites/MK8DXCharacters/MK8D_Inkling_Girl_Emblem.png',
+    'Inkling Girl (Green)':     'MarioKartSprites/MK8DXSprites/MK8DXCharacters/MK8D_Green_Inkling_Girl_Emblem.png',
+    'Inkling Girl (Magenta)':      'MarioKartSprites/MK8DXSprites/MK8DXCharacters/MK8D_Magenta_Inkling_Girl_Emblem.png',
+    'Inkling Boy (Blue)':       'MarioKartSprites/MK8DXSprites/MK8DXCharacters/MK8D_Inkling_Boy_Emblem.png',
+    'Inkling Boy (Purple)':     'MarioKartSprites/MK8DXSprites/MK8DXCharacters/MK8D_Purple_Inkling_Boy_Emblem.png',
+    'Inkling Boy (Cyan)': 'MarioKartSprites/MK8DXSprites/MK8DXCharacters/MK8D_Cyan_Inkling_Boy_Emblem.png',
+    'Villager (Boy)':     'MarioKartSprites/MK8DXSprites/MK8DXCharacters/MK8_Villager_Emblem.png',
+    'Villager (Girl)':    'MarioKartSprites/MK8DXSprites/MK8DXCharacters/MK8_Villager_Emblem.png',
+    'Isabelle':           'MarioKartSprites/MK8DXSprites/MK8DXCharacters/MK8_Isabelle_Emblem.png',
+    'Link (Champion Tunic)': 'MarioKartSprites/MK8DXSprites/MK8DXCharacters/MK8D_BotW_Link_Emblem.png',
+    'Link (Classic)':     'MarioKartSprites/MK8DXSprites/MK8DXCharacters/MK8_Link_Emblem.png',
+    'Diddy Kong':         'MarioKartSprites/MK8DXSprites/MK8DXCharacters/MK8D_Diddy_Kong_Emblem.png',
+    'Funky Kong':         'MarioKartSprites/MK8DXSprites/MK8DXCharacters/MK8D_Funky_Kong_Emblem.png',
+    'Pauline':            'MarioKartSprites/MK8DXSprites/MK8DXCharacters/MK8D_Pauline_Emblem.png',
+    'Birdo (pink)':       'MarioKartSprites/MK8DXSprites/MK8DXCharacters/MK8D_Birdo_Emblem.png',
+    'Birdo (Light Blue)': 'MarioKartSprites/MK8DXSprites/MK8DXCharacters/MK8D_Birdo_Light_Blue_Emblem.png',
+    'Birdo (Black)':      'MarioKartSprites/MK8DXSprites/MK8DXCharacters/MK8D_Birdo_Black_Emblem.png',
+    'Birdo (Red)':        'MarioKartSprites/MK8DXSprites/MK8DXCharacters/MK8D_Birdo_Red_Emblem.png',
+    'Birdo (Yellow)':     'MarioKartSprites/MK8DXSprites/MK8DXCharacters/MK8D_Birdo_Yellow_Emblem.png',
+    'Birdo (White)':      'MarioKartSprites/MK8DXSprites/MK8DXCharacters/MK8D_Birdo_White_Emblem.png',
+    'Birdo (Blue)':       'MarioKartSprites/MK8DXSprites/MK8DXCharacters/MK8D_Birdo_Blue_Emblem.png',
+    'Birdo (Green)':      'MarioKartSprites/MK8DXSprites/MK8DXCharacters/MK8D_Birdo_Green_Emblem.png',
+    'Birdo (Orange)':     'MarioKartSprites/MK8DXSprites/MK8DXCharacters/MK8D_Birdo_Orange_Emblem.png',
+    'Green Yoshi':        'MarioKartSprites/MK8DXSprites/MK8DXCharacters/MK8_Green_Yoshi_Emblem.png',
+    'Light-blue Yoshi':   'MarioKartSprites/MK8DXSprites/MK8DXCharacters/MK8_Light_Blue_Yoshi_Emblem.png',
+    'Black Yoshi':        'MarioKartSprites/MK8DXSprites/MK8DXCharacters/MK8_Black_Yoshi_Emblem.png',
+    'Red Yoshi':          'MarioKartSprites/MK8DXSprites/MK8DXCharacters/MK8_Red_Yoshi_Emblem.png',
+    'Yellow Yoshi':       'MarioKartSprites/MK8DXSprites/MK8DXCharacters/MK8_Yellow_Yoshi_Emblem.png',
+    'White Yoshi':        'MarioKartSprites/MK8DXSprites/MK8DXCharacters/MK8_White_Yoshi_Emblem.png',
+    'Blue Yoshi':         'MarioKartSprites/MK8DXSprites/MK8DXCharacters/MK8_Blue_Yoshi_Emblem.png',
+    'Pink Yoshi':         'MarioKartSprites/MK8DXSprites/MK8DXCharacters/MK8_Pink_Yoshi_Emblem.png',
+    'Orange Yoshi':       'MarioKartSprites/MK8DXSprites/MK8DXCharacters/MK8_Orange_Yoshi_Emblem.png',
+    'Red Shy Guy':        'MarioKartSprites/MK8DXSprites/MK8DXCharacters/MK8_Shy_Guy_Emblem.png',
+    'Light-Blue Shy Guy': 'MarioKartSprites/MK8DXSprites/MK8DXCharacters/MK8_Shy_Guy_Emblem.png',
+    'Black Shy Guy':      'MarioKartSprites/MK8DXSprites/MK8DXCharacters/MK8_Shy_Guy_Emblem.png',
+    'Green Shy Guy':      'MarioKartSprites/MK8DXSprites/MK8DXCharacters/MK8_Shy_Guy_Emblem.png',
+    'Yellow Shy Guy':     'MarioKartSprites/MK8DXSprites/MK8DXCharacters/MK8_Shy_Guy_Emblem.png',
+    'White Shy Guy':      'MarioKartSprites/MK8DXSprites/MK8DXCharacters/MK8_Shy_Guy_Emblem.png',
+    'Blue Shy Guy':       'MarioKartSprites/MK8DXSprites/MK8DXCharacters/MK8_Shy_Guy_Emblem.png',
+    'Pink Shy Guy':       'MarioKartSprites/MK8DXSprites/MK8DXCharacters/MK8_Shy_Guy_Emblem.png',
+    'Orange Shy Guy':     'MarioKartSprites/MK8DXSprites/MK8DXCharacters/MK8_Shy_Guy_Emblem.png',
+  },
+
+  karts: {
+    'Standard Kart':    'assets/karts/mk8dx/standard_kart.png',
+    'Pipe Frame':       'assets/karts/mk8dx/pipe_frame.png',
+    'Mach 8':           'assets/karts/mk8dx/mach_8.png',
+    'Steel Driver':     'assets/karts/mk8dx/steel_driver.png',
+    'Cat Cruiser':      'assets/karts/mk8dx/cat_cruiser.png',
+    'Circuit Special':  'assets/karts/mk8dx/circuit_special.png',
+    'Tri-Speeder':      'assets/karts/mk8dx/tri_speeder.png',
+    'Badwagon':         'assets/karts/mk8dx/badwagon.png',
+    'Prancer':          'assets/karts/mk8dx/prancer.png',
+    'Biddybuggy':       'assets/karts/mk8dx/biddybuggy.png',
+    'Landship':         'assets/karts/mk8dx/landship.png',
+    'Sneeker':          'assets/karts/mk8dx/sneeker.png',
+    'Sports Coupe':     'assets/karts/mk8dx/sports_coupe.png',
+    'Gold Standard':    'assets/karts/mk8dx/gold_standard.png',
+    'GLA':              'assets/karts/mk8dx/gla.png',
+    'W 25 Silver Arrow':'assets/karts/mk8dx/silver_arrow.png',
+    '300 SL Roadster':  'assets/karts/mk8dx/300sl_roadster.png',
+    'Blue Falcon':      'assets/karts/mk8dx/blue_falcon.png',
+    'Tanooki Kart':     'assets/karts/mk8dx/tanooki_kart.png',
+    'B Dasher':         'assets/karts/mk8dx/b_dasher.png',
+    'Streetle':         'assets/karts/mk8dx/streetle.png',
+    'P-Wing':           'assets/karts/mk8dx/p_wing.png',
+    'Koopa Clown':      'assets/karts/mk8dx/koopa_clown.png',
+    'Standard Bike':    'assets/karts/mk8dx/standard_bike.png',
+    'Comet':            'assets/karts/mk8dx/comet.png',
+    'Sport Bike':       'assets/karts/mk8dx/sport_bike.png',
+    'The Duke':         'assets/karts/mk8dx/the_duke.png',
+    'Flame Rider':      'assets/karts/mk8dx/flame_rider.png',
+    'Varmint':          'assets/karts/mk8dx/varmint.png',
+    'Mr. Scooty':       'assets/karts/mk8dx/mr_scooty.png',
+    'Jet Bike':         'assets/karts/mk8dx/jet_bike.png',
+    'Yoshi Bike':       'assets/karts/mk8dx/yoshi_bike.png',
+    'Master Cycle':     'assets/karts/mk8dx/master_cycle.png',
+    'Master Cycle Zero':'assets/karts/mk8dx/master_cycle_zero.png',
+    'City Tripper':     'assets/karts/mk8dx/city_tripper.png',
+    'Standard ATV':     'assets/karts/mk8dx/standard_atv.png',
+    'Wild Wiggler':     'assets/karts/mk8dx/wild_wiggler.png',
+    'Teddy Buggy':      'assets/karts/mk8dx/teddy_buggy.png',
+    'Bone Rattler':     'assets/karts/mk8dx/bone_rattler.png',
+    'Splat Buggy':      'assets/karts/mk8dx/splat_buggy.png',
+    'Inkstriker':       'assets/karts/mk8dx/inkstriker.png',
+  },
+
+  wheels: {
+    'Standard':         'assets/wheels/mk8dx/standard.png',
+    'Monster':          'assets/wheels/mk8dx/monster.png',
+    'Roller':           'assets/wheels/mk8dx/roller.png',
+    'Slim':             'assets/wheels/mk8dx/slim.png',
+    'Slick':            'assets/wheels/mk8dx/slick.png',
+    'Metal':            'assets/wheels/mk8dx/metal.png',
+    'Button':           'assets/wheels/mk8dx/button.png',
+    'Off-Road':         'assets/wheels/mk8dx/off_road.png',
+    'Sponge':           'assets/wheels/mk8dx/sponge.png',
+    'Wood':             'assets/wheels/mk8dx/wood.png',
+    'Cushion':          'assets/wheels/mk8dx/cushion.png',
+    'Blue Standard':    'assets/wheels/mk8dx/blue_standard.png',
+    'Hot Monster':      'assets/wheels/mk8dx/hot_monster.png',
+    'Azure Rider':      'assets/wheels/mk8dx/azure_rider.png',
+    'Crimson Slim':     'assets/wheels/mk8dx/crimson_slim.png',
+    'Cyber Slick':      'assets/wheels/mk8dx/cyber_slick.png',
+    'Retro Off-Road':   'assets/wheels/mk8dx/retro_off_road.png',
+    'Gold Tires':       'assets/wheels/mk8dx/gold_tires.png',
+    'GLA Tires':        'assets/wheels/mk8dx/gla_tires.png',
+    'Triforce Tires':   'assets/wheels/mk8dx/triforce_tires.png',
+    'Ancient Tires':    'assets/wheels/mk8dx/ancient_tires.png',
+    'Leaf Tires':       'assets/wheels/mk8dx/leaf_tires.png',
+  },
+
+  gliders: {
+    'Super Glider':     'assets/gliders/mk8dx/super_glider.png',
+    'Cloud Glider':     'assets/gliders/mk8dx/cloud_glider.png',
+    'Wario Wing':       'assets/gliders/mk8dx/wario_wing.png',
+    'Waddle Wing':      'assets/gliders/mk8dx/waddle_wing.png',
+    'Peach Parasol':    'assets/gliders/mk8dx/peach_parasol.png',
+    'Parachute':        'assets/gliders/mk8dx/parachute.png',
+    'Parafoil':         'assets/gliders/mk8dx/parafoil.png',
+    'Flower Glider':    'assets/gliders/mk8dx/flower_glider.png',
+    'Bowser Kite':      'assets/gliders/mk8dx/bowser_kite.png',
+    'Plane Glider':     'assets/gliders/mk8dx/plane_glider.png',
+    'MKTV Parafoil':    'assets/gliders/mk8dx/mktv_parafoil.png',
+    'Gold Glider':      'assets/gliders/mk8dx/gold_glider.png',
+    'Hylian Kite':      'assets/gliders/mk8dx/hylian_kite.png',
+    'Paraglider':       'assets/gliders/mk8dx/paraglider.png',
+    'Paper Glider':     'assets/gliders/mk8dx/paper_glider.png',
+  },
+
+  items: {
+    'Banana Peel':          'assets/items/mk8dx/banana_peel.png',
+    'Triple Banana Peels':  'assets/items/mk8dx/triple_banana.png',
+    'Green Shell':          'assets/items/mk8dx/green_shell.png',
+    'Triple Green Shells':  'assets/items/mk8dx/triple_green_shell.png',
+    'Red Shell':            'assets/items/mk8dx/red_shell.png',
+    'Triple Red Shells':    'assets/items/mk8dx/triple_red_shell.png',
+    'Blue Shell':           'assets/items/mk8dx/blue_shell.png',
+    'Bob-omb':              'assets/items/mk8dx/bobomb.png',
+    'Mushroom':             'assets/items/mk8dx/mushroom.png',
+    'Triple Mushroom':      'assets/items/mk8dx/triple_mushroom.png',
+    'Golden/Queen Mushroom':'assets/items/mk8dx/golden_mushroom.png',
+    'Bullet Bill':          'assets/items/mk8dx/bullet_bill.png',
+    'Blooper':              'assets/items/mk8dx/blooper.png',
+    'Lightning':            'assets/items/mk8dx/lightning.png',
+    'Star':                 'assets/items/mk8dx/star.png',
+    'Fireflower':           'assets/items/mk8dx/fire_flower.png',
+    'Boomerang':            'assets/items/mk8dx/boomerang.png',
+    'Piranha Plant':        'assets/items/mk8dx/piranha_plant.png',
+    'Boom Box':             'assets/items/mk8dx/boom_box.png',
+    '8':                    'assets/items/mk8dx/crazy_8.png',
+    'Coin':                 'assets/items/mk8dx/coin.png',
+    'Boo':                  'assets/items/mk8dx/boo.png',
+  },
+};
+
+// Helper — returns an <img> tag if the image map has an entry, otherwise empty string
+function sprite(map, name, size = 40) {
+  if (!map || !map[name]) return '';
+  return `<img src="${map[name]}" 
+               style="height:${size}px;width:${size}px;object-fit:contain;
+                      image-rendering:pixelated;flex-shrink:0"
+               alt="${name}"
+               onerror="this.style.display='none'">`;
+  // onerror hides the broken image icon if the file isn't uploaded yet
+}
+
+// ── STATE ──
+let itemMode = 'set';
+const parts = { kart: true, wheels: true, glider: true };
+
+function togglePart(key) {
+  parts[key] = !parts[key];
+  document.getElementById(`btn-${key}`).classList.toggle('active', parts[key]);
+}
+function setItemMode(mode, btn) {
+  itemMode = mode;
+  document.querySelectorAll('.item-mode-btn').forEach(b => b.classList.remove('active'));
+  btn.classList.add('active');
+  document.getElementById('itemCountRow').style.display = mode === 'none' ? 'none' : 'block';
+}
+function syncRange(id, valId) {
+  document.getElementById(valId).textContent = document.getElementById(id).value;
+}
+
+// ── UTILS ──
+function pick(arr) { return arr[Math.floor(Math.random() * arr.length)]; }
+function sample(arr, n) {
+  const copy = [...arr];
+  for (let i = copy.length - 1; i > 0; i--) {
+    const j = Math.floor(Math.random() * (i + 1));
+    [copy[i], copy[j]] = [copy[j], copy[i]];
+  }
+  return copy.slice(0, n);
+}
+
+// Pick a random character — BUG FIX: was randint(1, len-1), always skipping index 0 (Mario)
+function randomChar() {
+  // Build pool: each simple char is one entry; each variant group is one entry
+  const pool = [...CHARS_SIMPLE, ...CHARS_VARIANT];
+  const entry = pick(pool);
+  return Array.isArray(entry) ? pick(entry) : entry;
+}
+
+// Flatten all cups into individual track objects, shuffle, take n
+function pickCourses(n) {
+  const all = [];
+  for (const { cup, tracks } of CUP_DATA) {
+    for (const track of tracks) all.push({ cup, track });
+  }
+  return sample(all, Math.min(n, all.length));
+}
+
+// ── ROLL ──
+function rollAll() {
+  const players  = +document.getElementById('players').value;
+  const courseCount = +document.getElementById('courses').value;
+  const maxItems = +document.getElementById('itemCount').value;
+
+  // Characters
+  const charOut = document.getElementById('out-chars');
+  charOut.innerHTML = '';
+  for (let i = 0; i < players; i++) {
+    charOut.innerHTML += row(`P${i+1}`, randomChar(), i+1);
+  }
+
+  // Kart builds
+  const kartOut = document.getElementById('out-karts');
+  kartOut.innerHTML = '';
+  for (let i = 0; i < players; i++) {
+    const kart   = parts.kart   ? pick(KARTS)   : '—';
+    const wheels = parts.wheels ? pick(WHEELS)  : '—';
+    const glider = parts.glider ? pick(GLIDERS) : '—';
+    kartOut.innerHTML += `
+      <div class="result-row">
+        <span class="result-num">${i+1}</span>
+        <span class="result-label">P${i+1}</span>
+        <div class="kart-detail">
+          <span class="result-value">${kart}</span>
+          <span class="kart-parts">Wheels: ${wheels} &bull; Glider: ${glider}</span>
+        </div>
+      </div>`;
+  }
+
+  // Items
+  const itemSec = document.getElementById('sec-items');
+  const itemOut = document.getElementById('out-items');
+  if (itemMode === 'none') {
+    itemSec.style.display = 'none';
+  } else {
+    itemSec.style.display = 'block';
+    const count = itemMode === 'random'
+      ? (1 + Math.floor(Math.random() * maxItems))
+      : maxItems;
+    const picked = sample(ITEMS, Math.min(count, ITEMS.length));
+    itemOut.innerHTML = picked.map((item, i) => row(`Item ${i+1}`, item, i+1)).join('');
+  }
+
+  // Courses — show cup name below track name
+  const courseOut = document.getElementById('out-courses');
+  const picked = pickCourses(courseCount);
+  courseOut.innerHTML = picked.map(({ cup, track }, i) => `
+    <div class="result-row">
+      <span class="result-num">${i+1}</span>
+      <span class="result-label">Race ${i+1}</span>
+      <div class="kart-detail">
+        <span class="result-value">${track}</span>
+        <span class="course-cup">${cup}</span>
+      </div>
+    </div>`).join('');
+
+  const res = document.getElementById('results');
+  res.classList.add('show');
+  res.scrollIntoView({ behavior: 'smooth', block: 'start' });
+}
+
+function row(label, value, num) {
+  return `<div class="result-row">
+    <span class="result-num">${num}</span>
+    <span class="result-label">${label}</span>
+    <span class="result-value">${value}</span>
+  </div>`;
+}
+</script>
+</body>
+</html>
