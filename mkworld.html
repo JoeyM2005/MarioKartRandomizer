@@ -282,7 +282,7 @@ const KARTS = [
 ];
 
 const COURSES = [
-  'Mario Bros. Circuit','Crown City','Whistle Summit','DK Spaceport',
+  'Mario Bros. Circuit','Crown City','Whistlestop Summit','DK Spaceport',
   'Desert Hills','Shy Guy Bazaar','Wario Stadium','Airship Fortress',
   'DK Pass','Starview Peak','Sky-High Sundae','Wario Shipyard',
   'Koopa Troopa Beach','Faraway Oasis','Peach Stadium','Peach Beach',
@@ -290,7 +290,7 @@ const COURSES = [
   'Cheep Cheep Falls','Dandelion Deaths','Boo Cinema','Dry Bones Burnout',
   'Moo Moo Meadows','Choco Mountain',"Toad's Factory","Bowser's Castle",
   'Acorn Heights','Mario Circuit','Rainbow Road',
-  'Koopa Troopa Park','Mushroom Gorge' // fill to 32 unique
+  'Koopa Troopa Park','Mushroom Gorge'
 ];
 
 const ITEMS = [
@@ -589,6 +589,39 @@ const IMG = {
     'Kamek':                  'MarioKartSprites/MKWorldSprites/MKWorldItems/MKW_Kamek_Roulette.png',
     'Dash Food':              'MarioKartSprites/MKWorldSprites/MKWorldItems/MKWorld_Dash_Food_bag.png',
     'Coin Block':             'MarioKartSprites/MKWorldSprites/MKWorldItems/MKW_Question_Block_Roulette.png',
+  },
+
+  courses: {
+    'Mario Bros. Circuit':    'MarioKartSprites/MKWorldSprites/MKWorldCourses/MKWorldCoursePictures/MKWd_Mario_Bros_Circuit_Icon.png',
+    'Crown City':             'MarioKartSprites/MKWorldSprites/MKWorldCourses/MKWorldCoursePictures/MKWd_Crown_City_Icon.png',
+    'Whistlestop Summit':     'MarioKartSprites/MKWorldSprites/MKWorldCourses/MKWorldCoursePictures/MKWd_Whistlestop_Summit_Icon.png',
+    'DK Spaceport':           'MarioKartSprites/MKWorldSprites/MKWorldCourses/MKWorldCoursePictures/MKWd_DK_Spaceport_Icon.png',
+    'Desert Hills':           'MarioKartSprites/MKWorldSprites/MKWorldCourses/MKWorldCoursePictures/MKWd_Desert_Hills_Icon.png',
+    'Shy Guy Bazaar':         'MarioKartSprites/MKWorldSprites/MKWorldCourses/MKWorldCoursePictures/MKWd_Shy_Guy_Bazaar_Icon.png',
+    'Wario Stadium':          'MarioKartSprites/MKWorldSprites/MKWorldCourses/MKWorldCoursePictures/MKWd_Wario_Stadium_Icon.png',
+    'Airship Fortress':       'MarioKartSprites/MKWorldSprites/MKWorldCourses/MKWorldCoursePictures/MKWd_Airship_Fortress_Icon.png',
+    'DK Pass':                'MarioKartSprites/MKWorldSprites/MKWorldCourses/MKWorldCoursePictures/MKWd_DK_Pass_Icon.png',
+    'Starview Peak':          'MarioKartSprites/MKWorldSprites/MKWorldCourses/MKWorldCoursePictures/MKWd_Starview_Peak_Icon.png',
+    'Sky-High Sundae':        'MarioKartSprites/MKWorldSprites/MKWorldCourses/MKWorldCoursePictures/MKWd_Sky-High_Sundae_Icon.png',
+    'Wario Shipyard':         'MarioKartSprites/MKWorldSprites/MKWorldCourses/MKWorldCoursePictures/MKWd_Wario_Shipyard_Icon.png',
+    'Koopa Troopa Beach':     'MarioKartSprites/MKWorldSprites/MKWorldCourses/MKWorldCoursePictures/MKWd_Koopa_Troopa_Beach_Icon.png',
+    'Faraway Oasis':          'MarioKartSprites/MKWorldSprites/MKWorldCourses/MKWorldCoursePictures/MKWd_Faraway_Oasis_Icon.png',
+    'Peach Stadium':          'MarioKartSprites/MKWorldSprites/MKWorldCourses/MKWorldCoursePictures/MKWorld_Peach_Stadium_icon_2.png',
+    'Peach Beach':            'MarioKartSprites/MKWorldSprites/MKWorldCourses/MKWorldCoursePictures/Peach-Beach-MarioKartWorld.png',
+    'Salty Salty Speedway':   'MarioKartSprites/MKWorldSprites/MKWorldCourses/MKWorldCoursePictures/Salty_Salty_Speedway_Mario_Kart_World.png',
+    'Dino Dino Jungle':       'MarioKartSprites/MKWorldSprites/MKWorldCourses/MKWorldCoursePictures/Dino_Dino_Jungle_Mario_Kart_World.png',
+    'Great ? Block Ruins':    'MarioKartSprites/MKWorldSprites/MKWorldCourses/MKWorldCoursePictures/MKWorld_Question_Ruins_icon.png',
+    'Cheep Cheep Falls':      'MarioKartSprites/MKWorldSprites/MKWorldCourses/MKWorldCoursePictures/MKWorld_Cheep_Cheep_Falls_icon.png',
+    'Dandelion Depths':       'MarioKartSprites/MKWorldSprites/MKWorldCourses/MKWorldCoursePictures/MKWorld_Dandelion_Depths_icon.png',
+    'Boo Cinema':             'MarioKartSprites/MKWorldSprites/MKWorldCourses/MKWorldCoursePictures/MKWorld_Boo_Cinema_icon.png',
+    'Dry Bones Burnout':      'MarioKartSprites/MKWorldSprites/MKWorldCourses/MKWorldCoursePictures/MKWorld_Dry_Bones_Burnout_icon.png',
+    'Moo Moo Meadows':        'MarioKartSprites/MKWorldSprites/MKWorldCourses/MKWorldCoursePictures/MKWorld_Moo_Moo_Meadows_icon.png',
+    'Choco Mountain':         'MarioKartSprites/MKWorldSprites/MKWorldCourses/MKWorldCoursePictures/MKWorld_Choco_Mountain_icon.png',
+    "Toad's Factory":         'MarioKartSprites/MKWorldSprites/MKWorldCourses/MKWorldCoursePictures/MKWorld_Toads_Factory_icon.png',
+    "Bowser's Castle":        'MarioKartSprites/MKWorldSprites/MKWorldCourses/MKWorldCoursePictures/MKWorld_Bowsers_Castle_icon.png',
+    'Acorn Heights':          'MarioKartSprites/MKWorldSprites/MKWorldCourses/MKWorldCoursePictures/MKWorld_Acorn_Heights_Icon.png',
+    'Mario Circuit':          'MarioKartSprites/MKWorldSprites/MKWorldCourses/MKWorldCoursePictures/MKWorld_Mario_Circuit_icon.png',
+    'Rainbow Road':           'MarioKartSprites/MKWorldSprites/MKWorldCourses/MKWorldCoursePictures/MKWorld_Rainbow_Road_icon.png',
   },
 };
 
